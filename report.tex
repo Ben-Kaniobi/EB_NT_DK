@@ -1,23 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel:   Pflichtenheft
-% Autor:   Nicola KÃ¤ser
+% Autor:   Nicola Käser
 % Datum:   28.10.2013
 % Version: 0.1.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Versionshinweise und Ã¤nderungsprotokol:
+% Versionshinweise und änderungsprotokol:
 %
 %  v0.0.1  2013-10-14  Erste Formulierung in Microsoft Word, mit Konzentration
-%                      auf den Inhalt, da das Dokument so bald wie mÃ¶glich in
+%                      auf den Inhalt, da das Dokument so bald wie möglich in
 %                      LaTeX umformatiert wird.
 %  v0.0.2  2013-10-23  Inhalterweiterung
 %  v0.1.0  2013-10-28  Konvertierung in LaTeX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[version=last,fleqn,pointlessnumbers]{scrreprt}
-        % first: Ergebniss Kompatibel zu ersten Version; last: Ergebniss entspricht den aktuellen Paketen; fleqn: Formeln linksbÃ¼ndig; pointlessnumbers: Kapitelnummerierung ohne Punkt; twoside: Doppelseitiger Druck
+        % first: Ergebniss Kompatibel zu ersten Version; last: Ergebniss entspricht den aktuellen Paketen; fleqn: Formeln linksbündig; pointlessnumbers: Kapitelnummerierung ohne Punkt; twoside: Doppelseitiger Druck
 
 % Dokumentangaben
 \newcommand{\Titel}{Eurobot 2014 Naherkennung}
-\newcommand{\Uebertitel}{Pflichtenheft}
+\newcommand{\Uebertitel}{Projektarbeit 1 - Dokumentation}
 \newcommand{\AutorA}{Nicola K\"aser}
 \newcommand{\Dozent}{Martin Kucera}
 \newcommand{\Klasse}{E3a}
@@ -71,15 +71,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Schrift
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% StandardschriftgrÃ¶sse
+% Standardschriftgrösse
 \KOMAoptions{fontsize=11pt}
 
 % Zeilenabstand
 %\onehalfspacing  % 1.5 Zeilenabstand
 
 % Schrift eines bestimmten Elements anpassen/erstellen z.B. captionlabel
-%\setkomafont{captionlabel}{\itshape}  % definert Schriftart fÃ¼r captionlabel
-%\addkomafont{captionlabel}{\itshape}  % fÃ¼gt Eigenschaft zu captionlabel hinzu
+%\setkomafont{captionlabel}{\itshape}  % definert Schriftart für captionlabel
+%\addkomafont{captionlabel}{\itshape}  % fügt Eigenschaft zu captionlabel hinzu
 
 % Formatvorlage anpassen
 \setkomafont{pageheadfoot}{\footnotesize\sffamily}  % Kopf-/Fusszeile \normalfont
@@ -90,16 +90,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Gleitobjekte (Bilder/Tabellen/Formeln)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Formelneinzug = wie AufzÃ¤hlungseinzug
+% Formelneinzug = wie Aufzählungseinzug
 \setlength{\mathindent}{0.6\leftmargini}
 
 % Gleitobjekte
 \setlength{\intextsep}{8mm +2mm -2mm}%\intextsep10mm plus3mm minus2mm
 %\setlength{\textfloatsep}{100mm plus5pt minus3pt}
 
-% Bild-Tabellen Beschriftung linksbÃ¼ndig
-%\KOMAoptions{captions=nooneline}  % linksbÃ¼ndig
-\setcaphanging  % Mehrzeilige Beschriftung erhÃ¤lt Einzug
+% Bild-Tabellen Beschriftung linksbündig
+%\KOMAoptions{captions=nooneline}  % linksbündig
+\setcaphanging  % Mehrzeilige Beschriftung erhält Einzug
 
 
 
@@ -112,16 +112,16 @@
 % Papierformat
 \KOMAoptions{paper=A4}  % Format (Bei direkten Massangaben: 5cm:3cm)
 %\KOMAoptions{paper=landscape}  % Ausrichtung  (Standard Portrait)
-\KOMAoptions{pagesize=automedia}  % Angabe fÃ¼r Ausgangstreiber
+\KOMAoptions{pagesize=automedia}  % Angabe für Ausgangstreiber
 
 % Bindekorrektur
 %\KOMAoptions{BCOR=0.1cm}  % Bindekorrektur (Bereich der durchs Binden verloren geht)
 
-% GrÃ¶sse des Satzspiegels
-\KOMAoptions{DIV=11}  % GrÃ¶sse des Satzspiegels (Faktor ab 4), siehe S.38 scrguide.pdf; nur fÃ¼r A4 existieren Voreinstellungen, sonst calc o. classic als Option
+% Grösse des Satzspiegels
+\KOMAoptions{DIV=11}  % Grösse des Satzspiegels (Faktor ab 4), siehe S.38 scrguide.pdf; nur für A4 existieren Voreinstellungen, sonst calc o. classic als Option
 
 % Randbereich
-\KOMAoptions{mpinclude=false}  % Definiert ob der Randbereich zum TextkÃ¶rper hinzugezÃ¤hlt werden soll oder nicht -> TRUE nur bei SonderfÃ¤llen
+\KOMAoptions{mpinclude=false}  % Definiert ob der Randbereich zum Textkörper hinzugezählt werden soll oder nicht -> TRUE nur bei Sonderfällen
 
 % Doppelspaltiges Dokument
 \KOMAoptions{twocolumn=false}
@@ -133,8 +133,8 @@
 \pagestyle{scrheadings}  % myheadings scrheadings
 
 % Platzierzung letzte Zeile
-\raggedbottom  % Letze Zeile liegt dort wo sie gerade ist -> unterschiedlicher vertikaler Abstand zu Blatt Ende (unerwÃ¼nscht bei doppelseitigem Druck)
-%\flushbottom  % Letze Zeile immer am Schluss -> evtl. unterschiedliche AbsatzabstÃ¤nde
+\raggedbottom  % Letze Zeile liegt dort wo sie gerade ist -> unterschiedlicher vertikaler Abstand zu Blatt Ende (unerwünscht bei doppelseitigem Druck)
+%\flushbottom  % Letze Zeile immer am Schluss -> evtl. unterschiedliche Absatzabstände
 
 
 
@@ -142,7 +142,7 @@
 % Kopf-/Fusszeile
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Kopfzeile
-%\clearscrheadfoot  % Alle Vorgaben lÃ¶schen (plain und scrheadings)
+%\clearscrheadfoot  % Alle Vorgaben löschen (plain und scrheadings)
 \renewcommand*{\chaptermarkformat}{  % headmark ohne Kapitelnummer
 %\chapappifchapterprefix{\ }\thechapter\autodot\enskip
 }
@@ -165,7 +165,7 @@
 
 
 
-% Satzspiegel neu berechnen -> falls andere Schriftengeladen werden und/oder Zeilenabstand verÃ¤ndert wird
+% Satzspiegel neu berechnen -> falls andere Schriftengeladen werden und/oder Zeilenabstand verändert wird
 \recalctypearea
 
 
@@ -231,19 +231,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{titlepage/titlepage}
 \thispagestyle{empty}
-\cleardoublepage  % Leere Seite nach Titelseite einfÃ¼gen
+\cleardoublepage  % Leere Seite nach Titelseite einfügen
 %
 %
 %
-\pagenumbering{roman}  % RÃ¶misch Nummerieren ab hier
+\pagenumbering{roman}  % Römisch Nummerieren ab hier
 %
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract + Selbstaendige Arbeit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\input{abstract/abstract}
-%\input{abstract/selbstaendige_arbeit}
+\input{abstract/abstract}
+\input{abstract/selbstaendige_arbeit}
 %
 %
 %
@@ -258,7 +258,7 @@
 \setcounter{secnumdepth}{3}
 \addtocounter{tocdepth}{3}  
 %
-% Inhaltsverzeichnis linksbÃ¼ndig
+% Inhaltsverzeichnis linksbündig
 %\KOMAoptions{toc=flat}
 %
 % Verzeichnisse mit einer Kapitelnummer versehen
@@ -283,35 +283,23 @@
 % Dokument arabisch Nummerieren
 \pagenumbering{arabic}
 %
-% Einleitung
-%\input{content/einleitung}
-%
 % Kapitel 0: Beispiele
-%\input{content/0_beispiele}
+\input{content/0_beispiele}
 %
-% Kapitel 1: Ist-Aufnahme
-%\input{content/1_ist-aufnahme}
+% Einleitung
+\input{content/1_einleitung}
 %
-% Kapitel 2: Ressourcen und Infrastruktur
-%\input{content/2_ressourcen_und_infrastruktur}
-%
-% Kapitel 3: Aufgabe und Zielsetzung
-%\input{content/3_aufgabe_und_zielsetzung}
-%
-% Kapitel 4: Betriebsbedingungen
-%\input{content/4_betriebsbedingungen}
-%
-% Kapitel 5: Projektablauf
-%\input{content/5_projektablauf}
-%
-% Kapitel 6: BestÃ¤tigung
-%\input{content/6_bestaetigung}
+% Hauptteil
+\input{content/2_hauptteil}
 %
 % Ergebnisse
-%\input{content/ergebnis}
+\input{content/3_ergebnis}
+%
+% Pendenzen
+\input{content/4_pendenzen}
 %
 % Schlussfolgerung
-%\input{content/schlusswort}
+\input{content/5_schlusswort}
 %
 %
 %
