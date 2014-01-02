@@ -19,8 +19,7 @@
 \newcommand{\Titel}{Eurobot 2014 Naherkennung}
 \newcommand{\Uebertitel}{Projektarbeit 1 - Dokumentation}
 \newcommand{\AutorA}{Nicola K\"aser}
-\newcommand{\Dozent}{Martin Kucera}
-\newcommand{\Klasse}{E3a}
+\newcommand{\Dozent}{M. Kucera}
 \newcommand{\Datum}{\today}
 \newcommand{\Ort}{Burgdorf}
 \newcommand{\Version}{0.1.0}
@@ -152,9 +151,10 @@
 \renewcommand*{\chaptermarkformat}{  % headmark ohne Kapitelnummer
 %\chapappifchapterprefix{\ }\thechapter\autodot\enskip
 }
+% i: Links; c: Zentrum; o:Rechts; [Auf Kapitelstartseiten]; {Auf allen anderen Seiten}
 \ihead[]{\textcolor{bfhblue}{\headmark}}  % Chapter Titel in Kopfzeile
 \chead[]{}
-\ohead[]{\textcolor{bfhblue}{\Titel\ v\Version}}  % Titel mit Version in Kopfzeile
+\ohead[\textcolor{bfhblue}{\Titel, v\Version}]{\textcolor{bfhblue}{\Titel, v\Version}}  % Titel mit Version in Kopfzeile
 
 % Fusszeile
 \ifoot[\textcolor{bfhblue}{Berner Fachhochschule}]{\textcolor{bfhblue}{Berner Fachhochschule}}  % plain und scrheadings mit Dokumenttitel versehen
