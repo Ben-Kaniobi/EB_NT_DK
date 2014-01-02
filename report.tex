@@ -44,6 +44,8 @@
 \let\oldcite\cite
 % \cite neu definieren, dass Zähler jedesmal inkrementiert wird
 \renewcommand\cite[1]{\oldcite{#1}\stepcounter{citenum}}
+% Optionale Definition, damit Abbildungsverzeichnis und Tabellenverzeichnis auf gleicher Seite
+\newcommand{\listsOnSamePage}{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -276,8 +278,17 @@
 % Abbildungsverzeichnis
 \listoffigures
 %
-% Tabellenverzeichnis
-\listoftables
+\ifdefined\listsOnSamePage
+	% Gleiche Seite
+	\begingroup
+	\let\clearpage\relax
+	% Tabellenverzeichnis
+	\listoftables
+	\endgroup
+\else
+	% Tabellenverzeichnis
+	\listoftables
+\fi
 %
 \clearpage  % Seite beenden
 %
@@ -313,7 +324,7 @@
 % Quellen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Überprüfen ob mindestens 1x \cite verwendet wurde, sonst Kapitel weglassen
-\ifnum \value{citenum}>0
+\ifnum\value{citenum}>0
 	\chapter{Quellen}
 	In diesem Abschnitt sind alle Quellen des Dokumentes verzeichnet. Wird keine Referenz auf eine Quelle angegeben, so handelt es sich um selbst erarbeitete Inhalte des Autoren.
 	%
