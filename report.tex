@@ -74,7 +74,7 @@
 
 % Listing
 \definecolor{hellgelb}{rgb}{1,1,0.8}
-\definecolor{listingbackground}{RGB}{246,216,136} 
+\definecolor{listingbackground}{RGB}{246,216,136}
 \definecolor{colKeys}{rgb}{0,0,1}
 \definecolor{colIdentifier}{rgb}{0,0,0}
 \definecolor{colComments}{rgb}{0.2,0.8.3}
@@ -192,19 +192,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % XML
-\lstdefinestyle{XML}{numbers=left, 
+\lstdefinestyle{XML}{numbers=left,
 	basicstyle=\scriptsize\ttfamily,
-	numberstyle=\tiny, 
+	numberstyle=\tiny,
 	xleftmargin=0.5\leftmargin,
 	xrightmargin=\rightmargin,
 	numbersep=5pt,
-	backgroundcolor=\color{listingbackground}, 
+	backgroundcolor=\color{listingbackground},
 	breaklines=true,
 	captionpos=b,
 	language=XML}
 
 % MATlAB
-\lstdefinestyle{Matlab}{numbers=left, 
+\lstdefinestyle{Matlab}{numbers=left,
 	basicstyle=\scriptsize\ttfamily,
 	numberstyle=\tiny,
 	xleftmargin=0.5\leftmargin,
@@ -220,7 +220,7 @@
 	language=Matlab}
 
 % ANSI C
-\lstdefinestyle{C}{numbers=left, 
+\lstdefinestyle{C}{numbers=left,
 	basicstyle=\scriptsize\ttfamily,
 	numberstyle=\tiny,
 	xleftmargin=0.5\leftmargin,
@@ -271,9 +271,10 @@
 %\KOMAoptions{toc=listof}  % Abbildungs- und Tabellenverzeichnis ins Inhaltsverzeichnis
 \KOMAoptions{toc=index}  % Stichwortverzeichnis ins Inhaltsverzeichnis
 %
-% Tiefe der Gliederung
+% Tiefe der Gliederung (Nummerierung)
 \setcounter{secnumdepth}{\tocmaxdepth}
-\addtocounter{tocdepth}{\tocmaxdepth}  
+% Tiefe der Gliederung (Auflistung)
+\setcounter{tocdepth}{\tocmaxdepth}
 %
 % Inhaltsverzeichnis linksbündig
 %\KOMAoptions{toc=flat}
