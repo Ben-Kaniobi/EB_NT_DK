@@ -35,15 +35,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Schrift anpassen
-% param #1 Schriftfamilie: ptm  Times
-%                          phv 	Helvetica
-%                          pcr 	Courier
-%                          pbk 	Bookman
-%                          pag 	Avant Garde
-%                          ppl 	Palatino
-%                          pch 	Charter
-%                          pnc 	New Century Schoolbook
-%                          put 	Utopia
+% param #1 Schriftfamilie: ptm Times
+%                          phv Helvetica
+%                          pcr Courier
+%                          pbk Bookman
+%                          pag Avant Garde
+%                          ppl Palatino
+%                          pch Charter
+%                          pnc New Century Schoolbook
+%                          put Utopia
 % param #2 Strichdicke/Zeichenbreite: b  bold
 %                                     m  medium
 % param #3 Schriftform: n   normal
@@ -83,20 +83,20 @@
 \makeatother 
 %Kommando definieren
 \newcommandx{\formula}[3][3=\empty,usedefault]{
-    \sbox{\myendhook}{%
-        \begin{footnotesize}%
-            \begin{tabular}{>{$}l<{$} >{\RaggedRight}p{.33\textwidth}}%0.33 \begin{tabular}{@{}l >{\RaggedRight}p{.33\textwidth}}
-                #2%\ifthenelse{\equal{#2}{\empty}}{ }{#2}
-            \end{tabular}
-        \end{footnotesize}}
-    %
-    \begin{equation}
-        \ifthenelse{\equal{#3}{\empty}}
-        {}
-        {\label{#3}}%anstatt equation	
-        \boxed{\begin{split}#1\end{split}}
-        %\begin{split}#1\end{split}
-    \end{equation} %anstatt equation
+	\sbox{\myendhook}{%
+		\begin{footnotesize}%
+			\begin{tabular}{>{$}l<{$} >{\RaggedRight}p{.33\textwidth}}%0.33 \begin{tabular}{@{}l >{\RaggedRight}p{.33\textwidth}}
+				#2%\ifthenelse{\equal{#2}{\empty}}{ }{#2}
+			\end{tabular}
+		\end{footnotesize}}
+	%
+	\begin{equation}
+		\ifthenelse{\equal{#3}{\empty}}
+		{}
+		{\label{#3}}%anstatt equation
+		\boxed{\begin{split}#1\end{split}}
+		%\begin{split}#1\end{split}
+	\end{equation} %anstatt equation
 }
 
 
@@ -112,39 +112,39 @@
 \newlength{\imagewidth}
 \newlength{\imageheight}
 \newcommandx{\image}[5][3=\empty,4=\empty:,5=\empty,usedefault]{
-    \begin{figure}[H]%H htbp
-        \centering
-        \settowidth{\imagewidth}{\includegraphics[#2]{#1}}
-        \settoheight{\imageheight}{\includegraphics[#2]{#1}}
-        \ifdim\imagewidth<\textwidth
-            \ifdim\imageheight<\textheight
-                \includegraphics[#2]{#1}
-            \else
-                \includegraphics[height=\textheight]{#1}
-            \fi
-        \else
-            \ifdim\imageheight<\textheight
-                \includegraphics[width=\textwidth]{#1}
-            \else
-                \setlength{\imageheight}{\imageheight-\textheight}
-                \setlength{\imagewidth}{\imagewidth-\textwidth}
-                \ifdim\imageheight<\imagewidth
-                    \includegraphics[width=\textwidth]{#1}
-                \else
-                    \includegraphics[height=\textheight]{#1}
-                \fi
-            \fi
-        \fi
-        \ifthenelse{\equal{#5}{\empty}}
-        {
-            \ifthenelse{\equal{#3}{\empty}}{}{\caption{#3}}
-            \ifthenelse{\equal{#4}{\empty}}{}{\label{#4}}
-        }
-        {
-            \caption[#4]{#3}
-            \label{#5}
-        }
-    \end{figure}
+	\begin{figure}[H]%H htbp
+		\centering
+		\settowidth{\imagewidth}{\includegraphics[#2]{#1}}
+		\settoheight{\imageheight}{\includegraphics[#2]{#1}}
+		\ifdim\imagewidth<\textwidth
+			\ifdim\imageheight<\textheight
+				\includegraphics[#2]{#1}
+			\else
+				\includegraphics[height=\textheight]{#1}
+			\fi
+		\else
+			\ifdim\imageheight<\textheight
+				\includegraphics[width=\textwidth]{#1}
+			\else
+				\setlength{\imageheight}{\imageheight-\textheight}
+				\setlength{\imagewidth}{\imagewidth-\textwidth}
+				\ifdim\imageheight<\imagewidth
+					\includegraphics[width=\textwidth]{#1}
+				\else
+					\includegraphics[height=\textheight]{#1}
+				\fi
+			\fi
+		\fi
+		\ifthenelse{\equal{#5}{\empty}}
+		{
+			\ifthenelse{\equal{#3}{\empty}}{}{\caption{#3}}
+			\ifthenelse{\equal{#4}{\empty}}{}{\label{#4}}
+		}
+		{
+			\caption[#4]{#3}
+			\label{#5}
+		}
+	\end{figure}
 }
 
 
