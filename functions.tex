@@ -171,6 +171,15 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kapitel ohne Nummerierung aber mit Angabe im Inhaltsverzeichnis
+% param #1 Kapitelname
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\chapternn}[1]{\chapter*{#1} \addcontentsline{toc}{chapter}{#1}}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Redefinition von \cite, sodass bei jedem Aufruf ein Zähler inkrementiert
 % wird. Dieser kann verwendet werden, damit das Quellenkapitel nur bei der
 % Verwendung von \cite eingefügt wird (\ifnum\value{citenum}>0 ... \fi).

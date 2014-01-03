@@ -13,7 +13,11 @@
 %  v0.1.0  2013-10-28  Konvertierung in LaTeX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[version=last,fleqn,pointlessnumbers]{scrreprt}
-	% first: Ergebniss Kompatibel zu ersten Version; last: Ergebniss entspricht den aktuellen Paketen; fleqn: Formeln linksbündig; pointlessnumbers: Kapitelnummerierung ohne Punkt; twoside: Doppelseitiger Druck
+	% version=first:    Ergebniss Kompatibel zu ersten Version;
+	%         last:     Ergebniss entspricht den aktuellen Paketen;
+	% fleqn:            Formeln linksbündig;
+	% pointlessnumbers: Kapitelnummerierung ohne Punkt;
+	% twoside:          Doppelseitiger Druck
 
 % Dokumentangaben
 \newcommand{\Titel}         {Eurobot 2014 Naherkennung}
@@ -31,8 +35,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Maximale Tiefe des Inhaltsverzeichnis und Tiefe der Verzeichnisöffnung im PDF
 \newcommand{\tocmaxdepth}   {2}
-% Optionale Definition, damit Abbildungsverzeichnis und Tabellenverzeichnis auf gleicher Seite
-\newcommand{\listsOnSamePage}{}
+% Wenn definiert, dann werden ein Abbildungs- und Tabellenverzeichnis erstellt
+%\newboolean{includeLists}
+%\setboolean{includeLists}	{true}
+\newcommand{\includeLists}  {\true}
+% Wenn definiert, dann wird ein Stichwortverzeichnis erstellt erstellt
+%\newboolean{includeIndex}
+%\setboolean{includeIndex}	{true}
+\newcommand{\includeIndex}  {\true}
 
 
 
@@ -258,15 +268,15 @@
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Verzeichnisse
+% Übersichts- & Inhaltsverzeichnis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Inhaltsverzeichnis Inhalt
-%\KOMAoptions{toc=listof}  % Abbildungs- und Tabellenverzeichnis ins Inhaltsverzeichnis
-\KOMAoptions{toc=index}  % Stichwortverzeichnis ins Inhaltsverzeichnis
+%\KOMAoptions{toc=listof}   % Abbildungs- und Tabellenverzeichnis ins Inhaltsverzeichnis
+\KOMAoptions{toc=index}     % Stichwortverzeichnis ins Inhaltsverzeichnis
 %
-% Tiefe der Gliederung (Nummerierung)
-\setcounter{secnumdepth}{\tocmaxdepth}
-% Tiefe der Gliederung (Auflistung)
+% Tiefe der Nummerierung
+\setcounter{secnumdepth}{3}
+% Tiefe der Auflistung im Inhaltsverzeichnis
 \setcounter{tocdepth}{\tocmaxdepth}
 %
 % Inhaltsverzeichnis linksbündig
@@ -277,21 +287,6 @@
 %
 % Inhaltsverzeichnis
 \tableofcontents
-%
-% Abbildungsverzeichnis
-\listoffigures
-%
-\ifdefined\listsOnSamePage
-	% Gleiche Seite
-	\begingroup
-	\let\clearpage\relax
-	% Tabellenverzeichnis
-	\listoftables
-	\endgroup
-\else
-	% Tabellenverzeichnis
-	\listoftables
-\fi
 %
 \clearpage  % Seite beenden
 %
@@ -324,11 +319,29 @@
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hilfsübersichten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\KOMAoptions{listof=leveldown}  % Verzeichnisse als Section statt Kapitel
+%
+\ifdefined\includeLists
+	% Kapitel ohne Nummerierung, aber in Inhaltsverzeichnis
+	\chapternn{Abbildungs- und Tabellenübersicht}
+	% Abbildungsverzeichnis
+	\listoffigures
+	%
+	% Tabellenverzeichnis
+	\listoftables
+\fi
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Quellen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Überprüfen ob mindestens 1x \cite verwendet wurde, sonst Kapitel weglassen
 \ifnum\value{citenum}>0
-	\chapter{Quellen}
+	% Kapitel ohne Nummerierung, aber in Inhaltsverzeichnis
+	\chapternn{Quellen}
 	In diesem Abschnitt sind alle Quellen des Dokumentes verzeichnet. Wird keine Referenz auf eine Quelle angegeben, so handelt es sich um selbst erarbeitete Inhalte des Autoren.
 	%
 	% Literatur
@@ -344,21 +357,35 @@
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Anhang
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix
-% Umschalten auf alphabetisches Nummerieren
-%\pagenumbering{alph}
-\input{appendix/anhangA}  % Zeitplan
-\input{appendix/anhangB}  % Reglement
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Stichwortverzeichnis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\indexname}{Stichwortverzeichnis}
-\printindex
+\ifdefined\includeIndex
+	\renewcommand{\indexname}{Stichwortverzeichnis}
+	\printindex
+\fi
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Anhang
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Anhang im Inhaltsverzeichnis zu unterst auf der Seite anzeigen
+\addtocontents{toc}{\vfill}
+\appendix
+% Keine Nummerierung (Buchstabe) anzeigen vor Kapitelname --> Manuell "Anhang A: bla"
+\renewcommand{\thechapter}{}
+% Seitenzahl umschalten auf alphabetisches Nummerieren
+%\pagenumbering{alph}
+% Seitenzahl umschalten auf eigene Nummerierung: A-1, A-2, ...
+\setcounter{page}{1}
+\renewcommand{\thepage}{A-\arabic{page}}
+% Anhang A einfügen
+\input{appendix/anhangA}  % Zeitplan
+% Seitenzahl umschalten auf eigene Nummerierung: B-1, B-2, ...
+\setcounter{page}{1}
+\renewcommand{\thepage}{B-\arabic{page}}
+% Anhang B einfügen
+\input{appendix/anhangB}  % Reglement
 %
 %
 %
