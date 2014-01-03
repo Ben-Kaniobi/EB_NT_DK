@@ -24,8 +24,15 @@
 \newcommand{\Ort}           {Burgdorf}
 \newcommand{\Version}       {0.1.0}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Optionen
-\newcommand{\tocmaxdepth}   {2}  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Maximale Tiefe des Inhaltsverzeichnis und Tiefe der Verzeichnisöffnung im PDF
+\newcommand{\tocmaxdepth}   {2}
+% Optionale Definition, damit Abbildungsverzeichnis und Tabellenverzeichnis auf gleicher Seite
+\newcommand{\listsOnSamePage}{}
 
 
 
@@ -45,10 +52,9 @@
 \newcounter{citenum}
 % \cite als \oldcite speichern
 \let\oldcite\cite
-% \cite neu definieren, dass Zähler jedesmal inkrementiert wird
+% \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
 \renewcommand\cite[1]{\oldcite{#1}\stepcounter{citenum}}
-% Optionale Definition, damit Abbildungsverzeichnis und Tabellenverzeichnis auf gleicher Seite
-\newcommand{\listsOnSamePage}{}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
