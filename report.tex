@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Titel:   Pflichtenheft
+% Titel:   PA1 - Dokumentation
 % Autor:   Nicola Käser
 % Datum:   28.10.2013
 % Version: 0.1.0
@@ -13,16 +13,19 @@
 %  v0.1.0  2013-10-28  Konvertierung in LaTeX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[version=last,fleqn,pointlessnumbers]{scrreprt}
-        % first: Ergebniss Kompatibel zu ersten Version; last: Ergebniss entspricht den aktuellen Paketen; fleqn: Formeln linksbündig; pointlessnumbers: Kapitelnummerierung ohne Punkt; twoside: Doppelseitiger Druck
+		% first: Ergebniss Kompatibel zu ersten Version; last: Ergebniss entspricht den aktuellen Paketen; fleqn: Formeln linksbündig; pointlessnumbers: Kapitelnummerierung ohne Punkt; twoside: Doppelseitiger Druck
 
 % Dokumentangaben
-\newcommand{\Titel}{Eurobot 2014 Naherkennung}
-\newcommand{\Uebertitel}{Projektarbeit 1 - Dokumentation}
-\newcommand{\AutorA}{Nicola K\"aser}
-\newcommand{\Dozent}{M. Kucera}
-\newcommand{\Datum}{\today}
-\newcommand{\Ort}{Burgdorf}
-\newcommand{\Version}{0.1.0}
+\newcommand{\Titel}         {Eurobot 2014 Naherkennung}
+\newcommand{\Uebertitel}    {Projektarbeit 1 - Dokumentation}
+\newcommand{\AutorA}        {Nicola K\"aser}
+\newcommand{\Dozent}        {M. Kucera}
+\newcommand{\Datum}         {\today}
+\newcommand{\Ort}           {Burgdorf}
+\newcommand{\Version}       {0.1.0}
+
+% Optionen
+\newcommand{\tocmaxdepth}   {2}  %
 
 
 
@@ -51,7 +54,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Farben
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{color}                          % Color (not xcolor!)
+\RequirePackage{color}                              % Color (not xcolor!)
 % Allgemein
 \definecolor{grey}{gray}{0.7}
 \definecolor{lightgrey}{gray}{0.9}
@@ -263,8 +266,8 @@
 \KOMAoptions{toc=index}  % Stichwortverzeichnis ins Inhaltsverzeichnis
 %
 % Tiefe der Gliederung
-\setcounter{secnumdepth}{3}
-\addtocounter{tocdepth}{3}  
+\setcounter{secnumdepth}{\tocmaxdepth}
+\addtocounter{tocdepth}{\tocmaxdepth}  
 %
 % Inhaltsverzeichnis linksbündig
 %\KOMAoptions{toc=flat}
@@ -301,7 +304,7 @@
 \pagenumbering{arabic}
 %
 % Kapitel 0: Beispiele
-%\input{content/0_beispiele}
+\input{content/0_beispiele}
 %
 % Einleitung
 \input{content/1_einleitung}
@@ -343,8 +346,8 @@
 \appendix
 % Umschalten auf alphabetisches Nummerieren
 %\pagenumbering{alph}
-\input{appendix/anhangA} % Zeitplan
-\input{appendix/anhangB} % Reglement
+\input{appendix/anhangA}  % Zeitplan
+\input{appendix/anhangB}  % Reglement
 %
 %
 %
