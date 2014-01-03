@@ -47,13 +47,6 @@
 % Funktionen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{functions}
-%
-% Neuer Zähler für \cite
-\newcounter{citenum}
-% \cite als \oldcite speichern
-\let\oldcite\cite
-% \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
-\renewcommand\cite[1]{\oldcite{#1}\stepcounter{citenum}}
 
 
 
@@ -343,6 +336,9 @@
 	%
 	% Abbildungen
 	\printbibliography[heading=pic,keyword=pic,prefixnumbers=Abb,resetnumbers=true]
+	%
+	% Online
+	\printbibliography[heading=url,keyword=url,prefixnumbers=URL,resetnumbers=true]
 \fi
 %
 %

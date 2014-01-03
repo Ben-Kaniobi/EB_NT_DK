@@ -18,12 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Sprach-Optionen
-\usepackage[ngerman]{babel}  %neue deutsche Rechtschreibung
-\usepackage[T1]{fontenc}  %richtige Worttrennung
-%\usepackage[applemac]{inputenc}                % Mac - load extended character set (ISO 8859-1)
-%\usepackage[latin1]{inputenc}                  % Unix/Linux - load extended character set (ISO 8859-1)
-\usepackage[ansinew]{inputenc}                  % Windows - load extended character set (ISO 8859-1)
-%\usepackage[utf8]{inputenc}                    % UTF-8 encoding
+\usepackage[ngerman]{babel}         %neue deutsche Rechtschreibung
+\usepackage[T1]{fontenc}            %richtige Worttrennung
+%\usepackage[applemac]{inputenc}    % Mac - load extended character set (ISO 8859-1)
+%\usepackage[latin1]{inputenc}      % Unix/Linux - load extended character set (ISO 8859-1)
+\usepackage[ansinew]{inputenc}      % Windows - load extended character set (ISO 8859-1)
+%\usepackage[utf8]{inputenc}        % UTF-8 encoding
 
 %Zeilenabstand
 \usepackage{setspace}
@@ -68,9 +68,9 @@
 
 %Kopf- Fusszeile (Optionen müssen direkt übergeben werden)
 \usepackage[automark,  %Automatisches aktualisieren der Chapter-Titel
-%            headsepline,  %Linie Kopfzeile
-%            footsepline,  %Linie fusszeilezeile
-%            markuppercase,
+%			headsepline,  %Linie Kopfzeile
+%			footsepline,  %Linie fusszeilezeile
+%			markuppercase,
 			plainfootsepline  %Plain-Style auch mit Linie versehen
 			]{scrpage2}
 
@@ -90,6 +90,7 @@
 \bibliography{bibliography}
 \defbibheading{lit}{\section{Literatur}}
 \defbibheading{pic}{\section{Abbildungen}}
+\defbibheading{url}{\section{Online im Internet}}
 
 %Zusaetzliche Symbole direkt im Text
 \usepackage{textcomp}

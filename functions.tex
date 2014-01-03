@@ -1,8 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel:   Bericht - Funktionen
 % Autor:   Simon Grossenbacher
+%          Nicola Käser (Ergänzung)
 % Datum:   27.09.2013
-% Version: 1.0.0
+% Version: 1.0.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %:::Change-Log:::
@@ -11,6 +12,8 @@
 %                                                   -3. Fehlerkorrekturen
 %
 % 0.0.0       Erstellung der Datei
+% 1.0.0       Release
+% 1.1.0       Ergänzung: citenum
 %
 %:::Hinweis:::
 % Indexerstellung: makeindex -s report.ist report.idx
@@ -164,3 +167,17 @@
 \parbox[c][1.1\myy][c]{\myx}{%
 \includegraphics[{#1}]{#2}}%
 }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefinition von \cite, sodass bei jedem Aufruf ein Zähler inkrementiert
+% wird. Dieser kann verwendet werden, damit das Quellenkapitel nur bei der
+% Verwendung von \cite eingefügt wird (\ifnum\value{citenum}>0 ... \fi).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neuer Zähler für \cite
+\newcounter{citenum}
+% \cite als \oldcite speichern
+\let\oldcite\cite
+% \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
+\renewcommand\cite[1]{\oldcite{#1}\stepcounter{citenum}}
