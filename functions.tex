@@ -182,11 +182,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Redefinition von \cite, sodass bei jedem Aufruf ein Zähler inkrementiert
 % wird. Dieser kann verwendet werden, damit das Quellenkapitel nur bei der
-% Verwendung von \cite eingefügt wird (\ifnum\value{citenum}>0 ... \fi).
+% Verwendung von \cite eingefügt wird (\ifnum\value{numcite}>0 ... \fi).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neuer Zähler für \cite
-\newcounter{citenum}
+\newcounter{numcite}
 % \cite als \oldcite speichern
 \let\oldcite\cite
 % \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
-\renewcommand\cite[1]{\oldcite{#1} \stepcounter{citenum}}
+\renewcommand\cite[1]{\oldcite{#1} \stepcounter{numcite}}

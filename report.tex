@@ -259,7 +259,6 @@
 %
 %
 %
-%\hypersetup{pageanchor=true}
 \pagenumbering{roman}  % Römisch Nummerieren ab hier
 %
 %
@@ -296,7 +295,7 @@
 % Verzeichnisse mit einer Kapitelnummer versehen
 %\KOMAoptions{toc=listofnumbered}
 %
-% Inhaltsverzeichnis
+% Inhaltsverzeichnis einfügen
 \tableofcontents
 %
 \clearpage  % Seite beenden
@@ -315,17 +314,26 @@
 % Einleitung
 \input{content/1_einleitung}
 %
-% Hauptteil
-\input{content/2_hauptteil}
+% Recherche
+\input{content/2_recherche}
+%
+% Evaluation und Entscheidung
+\input{content/3_evaluation}
+%
+% Realisation
+\input{content/4_realisation}
+%
+% Kontrolle
+\input{content/5_kontrolle}
 %
 % Ergebnisse
-\input{content/3_ergebnis}
+\input{content/6_ergebnis}
 %
 % Pendenzen
-\input{content/4_pendenzen}
+\input{content/7_pendenzen}
 %
 % Schlussfolgerung
-\input{content/5_schlusswort}
+\input{content/8_schlusswort}
 %
 %
 %
@@ -337,6 +345,7 @@
 \ifthenbool{createLists}{
 	% Kapitel ohne Nummerierung, aber in Inhaltsverzeichnis
 	\chapternn{Abbildungs- und Tabellenübersicht}
+	%
 	% Abbildungsverzeichnis
 	\listoffigures
 	%
@@ -350,11 +359,10 @@
 % Quellen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Überprüfen ob mindestens 1x \cite verwendet wurde, sonst Kapitel weglassen
-\ifnum\value{citenum}>0
+\ifnum\value{numcite}>0
 	% Kapitel ohne Nummerierung, aber in Inhaltsverzeichnis
 	\chapternn{Quellen}
 	In diesem Abschnitt sind alle Quellen des Dokumentes verzeichnet. Wird keine Referenz auf eine Quelle angegeben, so handelt es sich um selbst erarbeitete Inhalte des Autoren.
-	\par citenum = \arabic{citenum}
 	%
 	% Literatur
 	\printbibliography[heading=lit,keyword=lit,prefixnumbers=Lit,resetnumbers=true]
