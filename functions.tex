@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel:   Bericht - Funktionen
 % Autor:   Simon Grossenbacher
-%          Nicola Käser (Ergänzung)
+%          Nicola Käser (v1.1.0)
 % Datum:   27.09.2013
 % Version: 1.1.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,7 +13,7 @@
 %
 % 0.0.0       Erstellung der Datei
 % 1.0.0       Release
-% 1.1.0       Ergänzung: citenum
+% 1.1.0       Ergänzungen
 %
 %:::Hinweis:::
 % Indexerstellung: makeindex -s report.ist report.idx
@@ -189,4 +189,4 @@
 % \cite als \oldcite speichern
 \let\oldcite\cite
 % \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
-\renewcommand\cite[1]{\oldcite{#1}\stepcounter{citenum}}
+\renewcommand\cite[1]{\oldcite{#1} \stepcounter{citenum}}

@@ -1,8 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titel:   Bericht - Pakete
-% Autor: Simon Grossenbacher
+% Autor:   Simon Grossenbacher
+%          Nicola Käser (v1.1.0)
 % Datum:   27.09.2013
-% Version: 1.0.0
+% Version: 1.1.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %:::Change-Log:::
@@ -11,127 +12,140 @@
 %                                                   -3. Fehlerkorrekturen
 %
 % 0.0.0       Erstellung der Datei
+% 1.0.0       Release
+% 1.1.0       Ergänzungen
 %
 %:::Hinweis:::
 % Indexerstellung: makeindex -s report.ist report.idx
 %   Umlaute müssen separat behandelt werden!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%Sprach-Optionen
-\usepackage[ngerman]{babel}         %neue deutsche Rechtschreibung
-\usepackage[T1]{fontenc}            %richtige Worttrennung
+% Fix für KOMA-Script
+\usepackage{scrhack}
+
+% Sprach-Optionen
+\usepackage[ngerman]{babel}         % Neue deutsche Rechtschreibung
+\usepackage[T1]{fontenc}            % Richtige Worttrennung
 %\usepackage[applemac]{inputenc}    % Mac - load extended character set (ISO 8859-1)
 %\usepackage[latin1]{inputenc}      % Unix/Linux - load extended character set (ISO 8859-1)
 \usepackage[ansinew]{inputenc}      % Windows - load extended character set (ISO 8859-1)
 %\usepackage[utf8]{inputenc}        % UTF-8 encoding
 
-%Zeilenabstand
+% Zeilenabstand
 \usepackage{setspace}
 
-%Mehr Tabellenoptionen
+% Mehr Tabellenoptionen
 \usepackage{tabularx}
 \usepackage{longtable}
 
-%Listen
+% Listen
 \usepackage{enumitem}
 
-%Besserer Flattersatz
+% Besserer Flattersatz
 \usepackage{ragged2e}
 
-%Gleiten verhindern
+% Gleiten verhindern
 \usepackage{float}
 \usepackage{placeins}
 
-%Zähler per Seite resetten (z.B. Fussnoten-Index)
+% Zähler per Seite resetten (z.B. Fussnoten-Index)
 \usepackage{perpage}
 
-%Ueberschriften anpassen
+% Ueberschriften anpassen
 \usepackage{titlesec}
 
-%Farben
+% Farben
 \usepackage{color}
-\usepackage{colortbl}  %Für farbige Tabellen
+\usepackage{colortbl}  % Für farbige Tabellen
 
-%PDF zu Dokument hinzufuegen
+% PDF zu Dokument hinzufuegen
 \usepackage[final]{pdfpages}
 
-%Grafiken verwalten
+% Grafiken verwalten
 \usepackage{graphicx}
 \usepackage[absolute]{textpos}
 
-%Zeichnen
+% Zeichnen
 %\usepackage{pst-pdf}
 %\usepackage{pst-all}
 
-%Listnings verwalten
+% Listnings verwalten
 \usepackage{listings}
 
-%Kopf- Fusszeile (Optionen müssen direkt übergeben werden)
-\usepackage[automark,  %Automatisches aktualisieren der Chapter-Titel
-%			headsepline,  %Linie Kopfzeile
-%			footsepline,  %Linie fusszeilezeile
+% Kopf- Fusszeile (Optionen müssen direkt übergeben werden)
+\usepackage[automark,           % Automatisches aktualisieren der Chapter-Titel
+%			headsepline,        % Linie Kopfzeile
+%			footsepline,        %Linie fusszeilezeile
 %			markuppercase,
-			plainfootsepline  %Plain-Style auch mit Linie versehen
+			plainfootsepline    % Plain-Style auch mit Linie versehen
 			]{scrpage2}
 
-%Flexible Argumente bei Funktionen
+% Flexible Argumente bei Funktionen
 \usepackage{xargs}
 
-%erweiterte Steuerfunktionen
+% Erweiterte Steuerfunktionen
 \usepackage{ifthen}
+% Vereinfachungen zur ifthen Package
+\newcommand{\setnewboolean}[2]{\newboolean{#1} \setboolean{#1}{#2}}
+\newcommand{\ifthen}[2]{\ifthenelse{#1}{#2}{}}
+\newcommand{\ifthenbool}[2]{\ifthenelse{\boolean{#1}}{#2}{}}
+\newcommand{\ifthenelsebool}[3]{\ifthenelse{\boolean{#1}}{#2}{#3}}
 
-%Index für Stichwortverzeichnis
+% Index für Stichwortverzeichnis
 \usepackage{makeidx}
 
-%Index für Literaturverzeichnis
+% Index für Literaturverzeichnis
 \usepackage[babel,german=quotes]{csquotes}
 %\usepackage[backend=biber,style=numeric,defernumbers=true,sorting=nyt]{biblatex}
-\usepackage[backend=bibtex,defernumbers=true]{biblatex}
+\usepackage[backend=bibtex8,defernumbers=true]{biblatex}
 \bibliography{bibliography}
 \defbibheading{lit}{\section{Literatur}}
 \defbibheading{pic}{\section{Abbildungen}}
 \defbibheading{url}{\section{Online im Internet}}
 
-%Zusaetzliche Symbole direkt im Text
+% Zusaetzliche Symbole direkt im Text
 \usepackage{textcomp}
 \usepackage{amssymb}
 
-%Einheit kontrolliert eingeben
+% Einheit kontrolliert eingeben
 \usepackage{units}
 
-%dynamische Datumsausgabe
+% Dynamische Datumsausgabe
 \usepackage[german]{isodate}
 
-%Zusaetzlich Mathemtiksymbole
+% Zusaetzlich Mathemtiksymbole
 \usepackage{amsmath}
 \usepackage{mathtools}
 
-%Besser Handling von internen Countern und Berechnungen
+% Besser Handling von internen Countern und Berechnungen
 \usepackage{calc}
 
-%TODOs anbringen am Rand
+% ToDos anbringen am Rand
 \usepackage{todonotes}
 
-%Hyperlinks (Muss das letzte geladene Paket sein)
-\usepackage[bookmarks=true,                     %Verzeichnis generieren
-	bookmarksopen=true,                 %Verzeichnis öffnen
-	bookmarksopenlevel=\tocmaxdepth,    %Tiefe der Verzeichnisöffnung
-	unicode=false,                      %non-Latin Zeichen
-	pdftoolbar=true,                    %PDF-Viewer Toolbar
-	pdfmenubar=true,                    %PDF-Viewer Menü?
-	pdffitwindow=true,                  %Fenster an Seite anpassen beim Öffnen
-	pdftitle={\Titel},                  %Titel
-%	pdfauthor={\Autor1, \Autor2, \Autor3},  %Autor
-	pdfsubject={\Uebertitel},           %Thema
-%	pdfcreator={\Autor1, \Autor2, \Autor3},  %Ersteller des Dokuments
-%	pdfproducer={\Autor1, \Autor2, \Autor3},  %Produzent des Dokuments
-	pdfnewwindow=true,                  %Links in neuem Fenster
-	colorlinks=true,                    %false: Boxen-Links; true: Farben-Links
-	linkcolor=black,                    %Farbe von internen Links
-	citecolor=black,                    %Farbe von Links zu Bibliography
-	filecolor=magenta,                  %Farbe von Links zu Dateien
-	urlcolor=blue                       %Farbe von externen Links
+% Hyperlinks (Muss das letzte geladene Paket sein)
+\usepackage[bookmarks=true,             % Verzeichnis generieren
+	bookmarksopen=true,                 % Verzeichnis öffnen
+	bookmarksopenlevel=\tocmaxdepth,    % Tiefe der Verzeichnisöffnung
+	unicode=false,                      % non-Latin Zeichen
+	pdftoolbar=true,                    % PDF-Viewer Toolbar
+	pdfmenubar=true,                    % PDF-Viewer Menü?
+	pdffitwindow=true,                  % Fenster an Seite anpassen beim Öffnen
+	pdftitle={\Titel},                  % Titel
+%	pdfauthor={\Autor1, \Autor2},       % Autor
+	pdfsubject={\Uebertitel},           % Thema
+%	pdfcreator={\Autor1, \Autor2},      % Ersteller des Dokuments
+%	pdfproducer={\Autor1, \Autor2},     % Produzent des Dokuments
+	pdfnewwindow=true,                  % Links in neuem Fenster
+	colorlinks=true,                    % false: Boxen-Links; true: Farben-Links
+	linkcolor=black,                    % Farbe von internen Links
+	citecolor=black,                    % Farbe von Links zu Bibliography
+	filecolor=magenta,                  % Farbe von Links zu Dateien
+	urlcolor=blue                       % Farbe von externen Links
 	]{hyperref}
-	
-%Glossar/Abkürzungsverzeichnis
+
+% Glossar/Abkürzungsverzeichnis
 \usepackage[acronym,makeindex]{glossaries}
+
+% Übersichtsverzeichnis
+\usepackage{shorttoc}
