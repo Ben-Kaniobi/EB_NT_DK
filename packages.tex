@@ -111,7 +111,14 @@
 \usepackage{amssymb}
 
 % Einheit kontrolliert eingeben
+% units -> Schöne Darstellung:
+% Z.B. \unitfrac[1.2]{m}{s} ergibt 1.2m/s (wobei m/s wie ein Zeichen)
+% siunitx -> SI-Einheiten:
+% Z.B. \SI{1.2}{\meter\per\second} ergibt 1,2 ms-1
+% (wobei -1 hochgestellt, Lücke vor Einheit halb so gross und Komma automatisch)
 \usepackage{units}
+\usepackage{siunitx}
+\sisetup{locale=DE}
 
 % Dynamische Datumsausgabe
 \usepackage[german]{isodate}
@@ -129,7 +136,7 @@
 % Hyperlinks (Muss das letzte geladene Paket sein)
 \usepackage[bookmarks=true,             % Verzeichnis generieren
 	bookmarksopen=true,                 % Verzeichnis öffnen
-	bookmarksopenlevel=\tocmaxdepth,    % Tiefe der Verzeichnisöffnung
+	bookmarksopenlevel=\pdfmaxdepth,    % Tiefe der Verzeichnisöffnung
 	unicode=false,                      % non-Latin Zeichen
 	pdftoolbar=true,                    % PDF-Viewer Toolbar
 	pdfmenubar=true,                    % PDF-Viewer Menü?
@@ -148,7 +155,7 @@
 	]{hyperref}
 
 % Glossar/Abkürzungsverzeichnis
-\usepackage[acronym,makeindex]{glossaries}
+\usepackage[acronym,makeindex,nowarn]{glossaries}  % nowarn: Keine Warnungen anzeigen 
 
 % Übersichtsverzeichnis
 \usepackage[tight]{shorttoc}  % tight: Einträge nahe zusammen (standard ist loose), funktioniert aber nicht :/

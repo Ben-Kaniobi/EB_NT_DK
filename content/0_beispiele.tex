@@ -71,11 +71,14 @@
 	\section{Tabellen}\label{s:tabellen}
 		Tabellen in \LaTeX sind ziemlich umständlich. Daher empfiehlt sich ein entsprechendes Plugin in der Office-Umgebung, die ein \LaTeX -Export ermöglichen.
 		\begin{table}[htbp]
+			% Lokale Commands (nur gültig bis \end{table})
+			\newcommand{\T}[1]{\textcolor{white}{#1}}  % Titel
+			\newcommand{\n}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}  % Spezielle Zelle in der Umruch (\\) verwendet werden kann
 			\centering
 			\begin{tabular}{|l|l|l|}
 				\hline
 				\rowcolor{bfhblue}
-				\textcolor{white}{Spalte 1} & \textcolor{white}{Spalte 2} & \textcolor{white}{Spalte 3}\\
+				\T{white}{Spalte 1} & \T{white}{Spalte 2} & \T{white}{Spalte 3}\\
 				\hline
 				Ich & bin & da \\
 				\hline

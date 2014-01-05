@@ -3,3 +3,50 @@
 % Autor:   Nicola Käser
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Recherche}\label{ch:recherche}
+Zu Beginn mussten Informationen beschafft werden mit welchen Methoden eine Distanzmessung realisiert werden kann. Diese konnten dann in zwei Kategorien eingeordnet werden, eine Kategorie die sich für den Eurobot-Wettbewerb eignet und eine Kategorie die aus verschiedenen Gründen weniger gut geeignet ist.
+%
+	\section{Ungeeignete Sensormethoden}
+	In diese Kategorie gehören Kontaktsensoren, da die Naherkennung dazu dienen soll den Kontakt mit dem Gegner zu verhindern. Weiter dazu gehören Kamerasysteme, da für die Verarbeitung der Daten sehr viel Systemleistung aufgewendet werden muss, und eine gute Software mehr Zeit und Aufwand erfordert als für diese Arbeit geplant ist. Auch Induktive- und kapazitive Sensoren eignen sich für die Naherkennung nicht, da diese nur Distanzen im Millimeterbereich messen.
+	\par Ein Radarsysteme, wie sie beispielsweise für automatische Türen verwendet werden, wäre theoretisch gut geeignet. Besonders die Tatsache, dass damit auch die Geschwindigkeit des Gegnerroboters ermittelt werden könnte wäre von Vorteil. Es ist jedoch so, dass die erhältlichen Radarsensoren jeweils eine Reichweite erst ab ca. zwei Metern aufweisen.
+	%
+	\section{Geeignete Sensormethoden}
+	Die geeigneten Sensortypen kann man wiederum in drei Unterkategorien mit unterschiedlichen Vor- und Nachteilen unterordnen. \todo{Bilder}
+	%
+		\subsection{Infrarot}
+		Die meisten Infrarotbasierten Sensoren sind auf dem Prinzip der Triangulation aufgebaut. Eine Lichtquelle im Sensor, meistens eine LED, strahlt Infrarotlicht aus. Trifft das Licht auf ein Objekt, so wird es  in einem zur Distanz im Verhältnis stehenden Winkel zurückgeworfen. Beim Sensor trifft dieses Licht auf ein Array von Infrarot-Empfängern, wodurch der Winkel und somit auch die Distanz zum Objekt berechnet werden kann.
+		\image{content/image/ir_prinzip}{scale=.3}[Prinzip der Infrarot-Distanzmessung \cite{pic:ir}][Prinzip der Infrarot-Distanzmessung][pic:ir]
+		\par Die früheren Eurobot-Teilnehmer der Berner Fachhochschule verwendeten hauptsächlich Infrarotsensoren von Sharp die dieses Prinzip verwenden. Sie stellten damit jedoch einige Probleme fest, so kam es während dem Wettbewerb vermehrt zu Aussetzern und Fehlmessungen. \cite{lit:gegnerischer_roboter} Diese Fehlmessungen wurden vermutlich wegen Störungen durch den Autofokus von Fotoapparaten hervorgerufen. Mit moduliertem Infrarotlicht könnten solche Störungen beseitigt werden. Möglicherweise ist dies jedoch mit einem Array von Infrarot-Empfängern schwieriger zu realisieren, denn die Sensoren die mit einer Modulation arbeiten greifen nicht auf die Triangulation zurück.
+		\par So ist eine weitere Möglichkeit die bei Infrarot angewendet wird die Distanzermittlung mittels der Intensität. Die Sensoren die auf diesem Prinzip basieren, messen aber für gewöhnlich nicht direkt die Distanz, sondern haben einfach eine bestimmte Schaltschwelle.
+		\par Mit Infrarot wäre auch noch eine Messung per Laufzeitverfahren möglich, dazu wurden aber keine Sensoren gefunden.
+		%
+		\subsection{Ultraschall}
+		Da Schall viel langsamer ist als Licht, wird die Laufzeitmessung mit Ultraschall häufiger eingesetzt. Ein Ultraschallgeber sendet ein Signal aus, welches dann von einem Objekt reflektiert wird. Mit einem Ultraschallsensor kann das Signal dann wieder empfangen werden. Durch die halbe Zeitdifferenz und die Schallgeschwindigkeit kann dann die Distanz berechnet werden. Je nach Frequenz des Ultraschalls variiert die Grösse des Messkegels. Der Vorteil von Ultraschallsensoren im Gegensatz zu Infrarotsensoren ist, dass das Material und die Farbe des zu detektierenden Objekts keinen Einfluss auf die Messung hat. In der Thesisarbeit hat ein Vorgängerteam beim Evaluieren verschiedener Sensoren Probleme mit bewegten Objekten aufgrund des Dopplereffektes\footnote{Zeitliche Stauchung/Dehnung eines Signals bei schneller Veränderungen des Abstands zwischen Sender und Empfänger, was zur Änderung der wahrgenommenen Frequenz führt.} festgestellt. \cite{lit:gegnerischer_roboter}
+		%
+		\subsection{Laser}
+		Für möglichst genaue Messungen verwendet man am Besten Laserensoren. Die meisten Lasersensoren nutzen auch die Triangulation, im Gegensatz zu Sensoren mit Infrarot-LEDs erhält man aber aufgrund der Lasereigenschaften eine viel genauere Messung. Der Nachteil liegt auf der Hand, durch die genauere Messung ist der Messpunkt auch sehr viel kleiner. Möchte man einen grösseren Bereich abdecken, müssen desshalb entweder mehrere Laser verwendet werden, oder es muss mittels mechanischer Konstruktion an verschiedenen stellen Mehrmals gemessen werden. \todo{evtl. Bild b) von SLAM-Buch auf Seite 46}
+		%
+	\section{Sensorliste}
+	Mit der oben genannten Kategorisierung wurde eine Liste von geeigneten erhältlichen Sensoren zusammengestellt:
+	\input{content/sensortabelle}\todo{kleiner, transponiert oder separat}
+
+
+%Fur das Eurobot-Projekt wurden Infrarotsensoren von Sharp zur Gegnererkennung eingesetzt. Sie wurden gemass
+%Projektdokumentation[1] bereits vom Vorgangerteam erfolgreich eingesetzt. Wahrend dem Wettbewerb kam es
+%jedoch vermehrt zu Aussetzern und Fehlmessungen durch re
+%ektierendes Licht auf dem Spieltisch. Ein Problem
+%war auch der Kennlinienverlauf des Sensors. Dieser weist zu Beginn des Messbereiches einen Knick auf, wodurch in
+%einem gewissen Distanzbereich eine Zweideutigkeit auftritt und somit eine nicht eindeutig denierte Distanz zuruckliefert.
+%Aufgrund dessen ergab sich die Entscheidung, fur die Thesis neue Sensoren zu evaluieren und einzusetzen.
+%Auch hinsichtlich unseren Nachfolgern, welche mit sehr grosser Wahrscheinlichkeit auch wieder Distanzsensoren
+%verwenden werden.
+%Um einen Eindruck verschiedener Sensortypen zu erhalten und geeignete fur die Evaluation auszuwahlen, wurde
+%mit der Firma Baumer1 Kontakt aufgenommen. Fur eine kurze Instruktion und Prasentation der verschiedenen
+%Sensortypen haben sie kurzerhand einen Mitarbeiter (Herr P.Frei) in die BFH delegiert.
+%Fur den Einsatz im Roboter zeigten sich nach einigen Sensortypen ein Ultraschall- und ein Lasersensor am geeignetsten.
+%Jeden Sensortyp gibt es in verschiedenen Ausgaben fur verschiedene Einsatzgebiete. Leider besitzt keiner
+%dieser Typen einen Messbereich zwischen 0m und 1m, was fur unser Vorhaben ideal geeignet ware. Die kleinen
+%Sensoren messen zwar bis wenige Zentimeter Distanz, konnen dafur eine weniger grosse Distanz abdecken. Bei den
+%grossen Bauformen ist gerade das Gegenteil das Problem. Aufgrund dessen wurde ein Sensortype mit mittlerem
+%Messbereich als am geeignetsten empfunden. So konnen zwar sehr kurze Distanzen nicht mehr gemessen werden,
+%dafur wird rechtzeitig erkannt, wenn sich ein Objekt in der Fahrtrichtung bendet. Somit ist gewahrleistet, dass
+%eine mogliche Kollision fruhzeitig erkannt wird. Fur Distanzen die unterhalb des Messbereichs liegen, liefern die

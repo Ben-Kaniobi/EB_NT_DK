@@ -34,8 +34,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Pakete
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Maximale Tiefe des Inhaltsverzeichnis und Tiefe der Verzeichnisöffnung im PDF
+% Maximale Tiefe des Inhaltsverzeichnis
 \newcommand{\tocmaxdepth}   {2}
+% Maximale Tiefe der Verzeichnisöffnung im PDF
+\newcommand{\pdfmaxdepth}   {1}
 \input{packages}
 
 
@@ -46,7 +48,7 @@
 % Flag ob ein Abbildungs- und Tabellenverzeichnis erstellt werden soll
 \setnewboolean{createLists}     {true}
 % Flag ob ein Stichwortverzeichnis erstellt werden soll
-\setnewboolean{createIndex}     {true}
+\setnewboolean{createIndex}     {false}
 % Flag ob ein Übersichtsverzeichnis erstellt werden soll
 \setnewboolean{createShorttoc}  {true}
 
