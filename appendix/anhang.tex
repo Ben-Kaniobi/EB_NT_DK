@@ -1,0 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titel:   Anhang
+% Autor:   Nicola Käser
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Umschalten der Seitennummerierung auf (Kapitelbuchstabe)-(Seite, 0-indexiert)
+\newcommand{\mypagenumbering}{
+	% Seitenzahl umschalten auf eigene Nummerierung: A-1, A-2, ...
+	\renewcommand{\thepage}{\Alph{chapter}-\arabic{page}}
+	% Seitenzähler auf 0, damit die Seite 1 des Anhangs dann auch A-1
+	\setcounter{page}{0}
+}
+%
+% Anhang A
+\chapter{Bla}\label{ch:anhang_a}
+\mypagenumbering
+%\includepdf[scale=1,pages=-]{appendix/anhangA_Zeitplan.pdf}
+%
+% Anhang B
+\chapter{Bla}\label{ch:anhang_b}
+\mypagenumbering
+%\includepdf[scale=1,pages=-]{appendix/anhangA_Zeitplan.pdf}

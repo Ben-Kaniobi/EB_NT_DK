@@ -154,6 +154,12 @@
 \raggedbottom  % Letze Zeile liegt dort wo sie gerade ist -> unterschiedlicher vertikaler Abstand zu Blatt Ende (unerwünscht bei doppelseitigem Druck)
 %\flushbottom  % Letze Zeile immer am Schluss -> evtl. unterschiedliche Absatzabstände
 
+% Part-Seiten ohne Kopf- & Fusszeilen
+\renewcommand*{\partpagestyle}{empty}
+
+% Seitenzahl von Parts nicht im ToC anzeigen
+\addtocontents{toc}{\cftpagenumbersoff{part}}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -243,6 +249,8 @@
 % Dokument Anfang
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+% Neuer Part im Inhaltsverzeichnis
+\addcontentsline{toc}{part}{\Titel}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -312,28 +320,31 @@
 %\input{content/0_beispiele}
 %
 % Einleitung
-\input{content/1_einleitung}
+\input{content/einleitung}
+%
+% Anforderungen
+\input{content/anforderungen}
 %
 % Recherche
-\input{content/2_recherche}
+\input{content/recherche}
 %
 % Evaluation und Entscheidung
-\input{content/3_evaluation}
+\input{content/evaluation}
 %
 % Realisation
-\input{content/4_realisation}
+\input{content/realisation}
 %
 % Kontrolle
-\input{content/5_kontrolle}
+\input{content/kontrolle}
 %
 % Ergebnisse
-\input{content/6_ergebnis}
+\input{content/ergebnis}
 %
 % Pendenzen
-\input{content/7_pendenzen}
+\input{content/pendenzen}
 %
 % Schlussfolgerung
-\input{content/8_schlusswort}
+\input{content/schlusswort}
 %
 %
 %
@@ -389,26 +400,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Anhang
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neue Seite, damit Seitennummerierung richtig.
+% (Ohne wird das lezte Kapitel schon neu nummeriert, und wenn \pagenumbering
+% nach \part verwendet wird stimmt die Seitenzahl vom Part-Titel nicht.)
+\clearpage
+%
 % Anhang im Inhaltsverzeichnis zu unterst auf der Seite anzeigen
-\clearpage  % Damit Seitennummerierung richtig
-\addtocontents{toc}{\vfill}
+%\addtocontents{toc}{\vfill}
+%
+% Seitenzahl umschalten auf alphabetisches Nummerieren (nur für Titelblatt)
+\pagenumbering{Alph}
+%
+% Titel zur Abgrenzung des Anhangs, ohne Nummerierung im Inhaltsverzeichnis
+\partnn{Anhang}
+%
+% Auf Anhang umschalten
 \appendix
-% Keine Nummerierung (Buchstabe) anzeigen vor Kapitelname --> Manuell "Anhang A: bla"
-\renewcommand{\thechapter}{}
-% Seitenzahl umschalten auf alphabetisches Nummerieren
-%\pagenumbering{alph}
-% Seitenzahl umschalten auf eigene Nummerierung: A-1, A-2, ...
-\renewcommand{\thepage}{A-\arabic{page}}
-% Seitenzähler auf 0, damit die Seite 1 des Anhangs dann auch A-1
-\setcounter{page}{0}
-% Anhang A einfügen
-\input{appendix/anhangA}  % Zeitplan
-% Seitenzahl umschalten auf eigene Nummerierung: B-1, B-2, ...
-\renewcommand{\thepage}{B-\arabic{page}}
-% Seitenzähler auf 0, damit die Seite 1 des Anhangs dann auch B-1
-\setcounter{page}{0}
-% Anhang B einfügen
-\input{appendix/anhangB}  % Reglement
+% Anhang einfügen
+\input{appendix/anhang}
 %
 %
 %
