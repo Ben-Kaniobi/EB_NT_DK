@@ -2,4 +2,26 @@
 % Titel:   Anforderungen
 % Autor:   Nicola Käser
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Anforderungen}\label{ch:anforderungen}
+\chapter{Umfeld und Anforderungen}\label{ch:anforderungen}
+
+%
+	\section{Spielfeld}\label{s:spielfeld}
+	Der Roboter wird auf einem Spielfeld der Grösse 3 m x 2 m eingesetzt. Die Fläche ist von einem Rand der Höhe 7 cm umgeben. Auf dem Spielfeld gibt es diverse stationäre und mobile Objekte/Hindernisse. Pro Team sind zwei Roboter erlaubt, es können sich also bis zu vier Roboter auf dem Spilfeld befinden.
+	\par Die für die Naherkennung relevanten Aufgabenobjekte und das Spielfeld bestehen aus Holz und sind in den Farben Rot, Gelb oder Braun bemalt. Der Spielfeldrand ist in hellem grau bemalt. Zudem sind einige Objekte mit schwarzem Velcro\textsuperscript{TM} ausgestattet.
+	\par Die gegnerischen Roboter können aus beliebigem Material bestehen und eine beliebige Farbe haben. Die Form der Roboter kann, innerhalb eines Umfangs von maximal 1500 mm, beliebig sein.
+	%
+	\section{Störungsquellen}\label{s:umgebung_ung_stoerungsquellen}
+	Während des Wettkampfes wird höchstwahrscheinlich Musik laufen und es werden womöglich Kameras mit IR-Autofokus in Betrieb sein. Desweiteren ist zu beachten, dass die gegnerischen Roboter über beliebige Sensoren und Aktoren verfügen kann, die die Funktion der eigenen Sensoren beeinträchtigen kann. Auch beachtet werden muss, dass sich die Naherkennung und die eigene Navigation nicht gegenseitig stören darf.
+	%
+	\clearpage  % Neue Seite, übersichtshalber
+	%
+	\section{Anforderungen}
+	Die Anforderungen wurden also folgendermassen definiert:
+	\begin{description}
+		\item[Genauigkeit:] Damit das System zuverlässig funktioniert, muss ein Hindernis in einer Entfernung von \todo{Gleich wie im Pflichtenheft} 20 cm erkannt werden können, jedoch wäre eine noch bessere Erkennung wünschenswert.
+		\item[Zuverlässigkeit:] Da es sich bei der Naherkennung um ein Sicherheitssystem handelt, müssen mögliche Fehler- und Störungsanfälligkeiten minimiert werden.
+		\item[Geschwindigkeit:] Das System muss das Strategiesystem ohne schnittstellenbedingte Verzögerung über ein Hindernis informieren können.
+		\item[Platzbedarf:] Da das Volumen des Roboters relativ begrenzt ist, muss darauf geachtet werden, dass jedes Teilsystem darin unterzubringen ist. Es muss also eine Absprache mit dem Zuständigen Team gemacht werden.
+		\item[Energieverbrauch:] Auch die Energie in einem mobilen System wie ein Roboter ist begrenzt. Desshalb gilt es den Energieverbrauch möglichst klein zu halten.
+		\item[Sicherheit:] Zur Sicherheit von anwesenden Personen, muss das System die Sicherheitsanforderungen des Eurobot-Reglements erfüllen. Für die Naherkennung relevant sind vor allem die Bestimmungen für Laser. Es dürfen nur die Laserklassen\footnote{Klassifizierung nach EN 60825-1} 1 und 1M uneingeschränkt verwendet werden, die Laserklasse 2 darf nur verwendet werden, wenn der Strahl zu jeder Zeit innerhalb des Spielfeldes bleibt. Alle anderen Laserklassen (namentlich Laserklassen 2M, 3R, 3B und 4) sind nicht zugelassen. \cite{lit:eurobot_reglement}
+	\end{description}
