@@ -1,43 +1,109 @@
 \documentclass{scrartcl}
 
 \usepackage[ansinew]{inputenc}  % Schriftcodierung für Windows
-\usepackage[T1]{fontenc}  % Schriftkodierung
-\usepackage[ngerman]{babel}  % Neue de. Rechtschr. (Worttrennung, äöüß etc.) als Parameter für babel
-\usepackage{lmodern}  % Darstellung
-\usepackage{wasysym}  % Spezielle Symbole
+\usepackage[T1]{fontenc}        % Schriftkodierung
+\usepackage[ngerman]{babel}     % Neue de. Rechtschr. (Worttrennung, äöüß etc.) als Parameter für babel
+\usepackage{lmodern}            % Darstellung
+\usepackage{wasysym}            % Spezielle Symbole
+\usepackage{todonotes}          % ToDo-Notizen
+%\usepackage{calc}               % Erweiterte Berechnungen/Text messen
 %\usepackage{amsmath}  % Math
-%\usepackage[final]{pdfpages}  % PDF einbinden
+%\usepackage[final]{pdfpages}   % PDF einbinden
 
 \title{Testprotokoll Rangefinder}
 \subtitle{Blackboxtest Version 1.0}
 \author{N. Käser}
-\date{\today}
+\date{z.B. 6. Januar 2014}%\today}
 
+\newcommand{\hardwareinfo}{STM32 F4 Discovery Board mit RoboBoard}
 
 \begin{document}
-\maketitle
-%\tableofcontents
+\maketitle%\todo{Datum der Testdurchführung}
 %
-\section{SRF08 Adresse ändern}
-    %
-    \subsection{Funktion}
-        %
-        \begin{itemize}
-            \item bla\dotfill $\Box$
-            \item bla\dotfill $\CheckedBox$
-        \end{itemize}
-        %
-    \subsection{Funktion}
-        %
-        \begin{itemize}
-            \item bla\dotfill $\Box$
-            \item bla\dotfill $\CheckedBox$
-        \end{itemize}
-        %
-\section{Infrarot Task}
-    %
-\section{Ultraschall Task}
-    %
+\hfill Test Nr.: \setlength{\fboxsep}{1pt}\fbox{1}\fbox{2}
+\section{Software Set\_SRF08\_Address}
+	\subsection{Allgemein}
+		\begin{itemize}
+			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill $\Box$$\Box$%$\CheckedBox$
+		\end{itemize}
+	\subsection{SRF08 Adresse ändern}
+		Die aktuelle Adresse eines Moduls ist durch den Blinkcode beim Einstecken erkennbar. So kann jeweils überprüft werden, ob eine Adressänderung erfolgreich war.
+		\begin{itemize}
+		% Punktstyles ändern
+		\renewcommand{\labelitemii}{$\circ$}
+		\renewcommand{\labelitemiii}{$\cdot$}
+			\item Falsche Adresse wird nicht geschrieben
+			\begin{itemize}
+				\item Nicht im gültigen Bereich:
+				\begin{itemize}
+					\item 0x00\dotfill $\Box$$\Box$%$\CheckedBox$
+					\item 0xDE\dotfill $\Box$$\Box$%$\CheckedBox$
+				\end{itemize}
+				\item Ungerade:
+				\begin{itemize}
+					\item 0xE5\dotfill $\Box$$\Box$%$\CheckedBox$
+					\item 0xFB\dotfill $\Box$$\Box$%$\CheckedBox$
+				\end{itemize}
+			\end{itemize}
+			\item Gültige Adresse wird geschrieben:
+			\begin{itemize}
+				\item 0xFE\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item 0xE0\dotfill $\Box$$\Box$%$\CheckedBox$
+			\end{itemize}
+			\item Neue Adresse kann danach verwendet werden:
+			\begin{itemize}
+				\item 0xFE\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item 0xE0\dotfill $\Box$$\Box$%$\CheckedBox$
+			\end{itemize}
+		\end{itemize}
+		%
+		\clearpage
+		%
+\section{Software Rangefinder}
+	\subsection{Allgemein}
+		\begin{itemize}
+			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill $\Box$$\Box$%$\CheckedBox$
+		\end{itemize}
+	\subsection{Infrarot Task}
+		\begin{itemize}
+			\item Sensoren lösen bei Hindernis Alarm aus:
+			\begin{itemize}
+				\item Sensor links\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor mitte\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor rechts\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+			\end{itemize}
+			\item Sensoren setzen ohne Hindernis Alarm zurück:
+			\begin{itemize}
+				\item Sensor links\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor mitte\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor rechts\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+			\end{itemize}
+			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill $\Box$$\Box$%$\CheckedBox$
+		\end{itemize}
+		%
+	\subsection{Ultraschall Task}
+		\begin{itemize}
+			\item Sensoren lösen bei Hindernis (näher als definiert) Alarm aus:
+			\begin{itemize}
+				\item Sensor vorne\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+			\end{itemize}
+			\item Sensoren setzen ohne Hindernis Alarm zurück:
+			\begin{itemize}
+				\item Sensor vorne\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+			\end{itemize}
+			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill $\Box$$\Box$%$\CheckedBox$
+		\end{itemize}
+		%
+	\subsection{Notizen}
+		A. Bla bla
+		%
+	\subsection{Fazit}\todo{Evtl. mit Notizen zusammen wegen Platz}
+		Das Verhalten bei Notiz A war voraussehbar und stört die Bedienbarkeit nicht. Wird ignoriert.
+		%
 \end{document}
 
 
