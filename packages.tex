@@ -132,6 +132,7 @@
 
 % ToDos anbringen am Rand
 \usepackage{todonotes}
+\newcommand{\ttodo}[1]{\textcolor{orange}{\textbf{#1}}\todo{}}  % Text-todo
 
 % Hyperlinks (Muss das letzte geladene Paket sein)
 \usepackage[bookmarks=true,             % Verzeichnis generieren
@@ -155,7 +156,7 @@
 	]{hyperref}
 
 % Glossar/Abkürzungsverzeichnis
-\usepackage[acronym,makeindex,nowarn]{glossaries}  % nowarn: Keine Warnungen anzeigen 
+\usepackage[acronym,makeindex,nowarn]{glossaries}  % nowarn: Keine Warnungen anzeigen
 
 % Übersichtsverzeichnis
 \usepackage[tight]{shorttoc}  % tight: Einträge nahe zusammen (standard ist loose), funktioniert aber nicht :/
