@@ -3,20 +3,22 @@
 % Autor:   Nicola Käser
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}\label{ch:evaluation}
-Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaulation bestellt werden. Einerseits wurden diverse Infrarot-Sensoren ausgewählt, anderseits auch Ultraschall-Module. Ein Laser-Sensor der in einer Eurobot-Thesis verwendet wurde, wurde auch noch dazu genommen. So konnte ein Einblick in alle erläuterten  geeigneten Methoden gewonnen werden und die Vor- und Nachteile abgewogen werden.
+Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaluation bestellt werden. Einerseits wurden diverse Infrarot-Sensoren ausgewählt, anderseits auch Ultraschall-Module. Ein Laser-Sensor der in einer Eurobot-Thesis verwendet wurde, wurde auch noch dazu genommen. So konnte ein Einblick in alle erläuterten  geeigneten Methoden gewonnen werden und die Vor- und Nachteile abgewogen werden.
 %
-	\section{\ttodo{GP2Y0A21 und GP2Y0A21}}
-	Die Infrarot-Sensoren \ttodo{GP2Y0A21 und GP2Y0A21} von Sharp basieren auf dem Triangulationsprinzip. Es sind Nachfolgemodelle der Typen wie die früheren Teams sie verwendeten.
+	\section{GP2D120 und GP2Y0A02YK}\label{s:gp2d120-und-gp2y0a02yk}
+	Die Infrarot-Sensoren \ttodo{GP2Y0A21 und GP2Y0A21} von Sharp basieren auf dem Triangulationsprinzip. \todo{nur einer ist nachfolger}Es sind Nachfolgemodelle der Typen wie die früheren Teams sie verwendeten.
 	\par\todo{Diagramm}
 	Die im vorherigen Kapitel beschriebenen Probleme wie Aussetzer und Messfehler konnten nicht reproduziert werden. Es gab einige Abweichungen wegen spiegelnder Oberfläche der Objekte, dieses Phänomen ist aber gut nachvollziehbar. Im Diagramm ist jedoch zu erkennen, dass auch bei diesen Sensor-Versionen die in der Thesis beschriebene Problematik der zweideutigen Messresultate \cite{lit:gegnerischer_roboter}  besteht.
-	\section{IS471F}\todo{name}
-	Auch von Sharp, ist der Sensor IS471F\todo{name}. Dabeil handelt es sich um ein Bauteil, das in einer einfachen Schaltung als Distanzschalter funktioniert.
+	\section{IS471F}\label{s:is471f}
+	Auch von Sharp, ist der Sensor IS471F. Dabei handelt es sich um ein Bauteil, das in einer einfachen Schaltung als Distanzschalter funktioniert.
 	\image{content/image/is471f}{scale=.5}[Einfache Beispielschaltung mit Sensor IS471F \cite{pic:is471f}][Einfache Beispielschaltung mit Sensor IS471F][pic:is471f]
-	Die im Sensor integrierte Schaltung steuert externe Infrarot-LEDs an. Ist das so modulierte Licht für den Sensor sichtbar, wo liefert dieser einen definierten Pegel, andernfalls den invertierten Pegel. Dies funktioniert nicht nur bei direkter Bestrahlung\cite{evtl. Synonym} wie bei Lichtschranken, sondern auch bei Reflektiertem Licht. Für die Naherkennung könnte also über die Lichtstärke die Schaltdistanz eingestellt werden.
+	Die im Sensor integrierte Schaltung steuert externe Infrarot-LEDs an. Ist das so modulierte Licht für den Sensor sichtbar, wo liefert dieser einen definierten Pegel, andernfalls den invertierten Pegel. Dies funktioniert nicht nur bei direkter Bestrahlung, wie bei Lichtschranken, sondern auch bei Reflektiertem Licht. Für die Naherkennung könnte also über die Lichtstärke die Schaltdistanz eingestellt werden.
 	%
-	\section{SRF-Module von \ttodo{bla}}
-	Die \ttodo{blablabla} bla
+	\section{SRF-Module von Devantech}\label{s:srf-module-von-devantech}
+	Devantech\footnote{\url{http://www.devantech.co.uk/}} entwickelt diverse elektronische Module, darunter befindet sich auch eine Reihe von Ultraschall-Modulen zur Distanzmessung.
+	Die \ttodo{blablabla} bla von 
 		\subsection{SRF02}
 		\subsection{SRF08}
 		\subsection{SRF10}
-	\section{Baumer nnn}\todo{name}
+	\section{Lasersensor von Baumer}\label{s:lasersensor-von-baumer}
+	Der Sensor OADM 13U7480/S35A von Baumer\footnote{\url{http://www.baumer.com/ch-de/}}

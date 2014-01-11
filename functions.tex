@@ -194,7 +194,6 @@
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Redefinition von \cite, sodass bei jedem Aufruf ein Zähler inkrementiert
 % wird. Dieser kann verwendet werden, damit das Quellenkapitel nur bei der
@@ -206,3 +205,16 @@
 \let\oldcite\cite
 % \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
 \renewcommand\cite[1]{\oldcite{#1} \stepcounter{numcite}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neue Umgebung erstellen, PDF-Seiten darin sind 90° rotiert (z.B. Querformat)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{rotpdf90}{%
+	% PDF-Seite 90° rotieren
+	\clearpage\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 90}
+}{%
+	% PDF-Seite wieder auf 0° Rottation
+	\clearpage\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 0}
+}

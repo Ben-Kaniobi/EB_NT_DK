@@ -50,7 +50,7 @@
 % Flag ob ein Stichwortverzeichnis erstellt werden soll
 \setnewboolean{createIndex}     {false}
 % Flag ob ein Übersichtsverzeichnis erstellt werden soll
-\setnewboolean{createShorttoc}  {true}
+\setnewboolean{createShorttoc}  {false}
 
 
 
@@ -162,6 +162,9 @@
 
 % Seitenzahl von Parts nicht im ToC anzeigen
 \addtocontents{toc}{\cftpagenumbersoff{part}}
+
+% Fussnoten-Nummerierung bei jeder Seite neu beginnen
+\MakePerPage{footnote}
 
 
 
@@ -418,7 +421,7 @@
 \pagenumbering{Alph}
 %
 % Titel zur Abgrenzung des Anhangs, ohne Nummerierung im Inhaltsverzeichnis
-\partnn{Anhang}
+\partnn{Anhang}\label{p:anhang}
 %
 % Auf Anhang umschalten
 \appendix
