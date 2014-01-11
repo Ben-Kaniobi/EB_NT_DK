@@ -6,13 +6,31 @@
 Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaluation bestellt werden. Einerseits wurden diverse Infrarot-Sensoren ausgewählt, anderseits auch Ultraschall-Module. Ein Laser-Sensor der in einer Eurobot-Thesis verwendet wurde, wurde auch noch dazu genommen. So konnte ein Einblick in alle erläuterten  geeigneten Methoden gewonnen werden und die Vor- und Nachteile abgewogen werden.
 %
 	\section{GP2D120 und GP2Y0A02YK}\label{s:gp2d120-und-gp2y0a02yk}
-	Die Infrarot-Sensoren \ttodo{GP2Y0A21 und GP2Y0A21} von Sharp basieren auf dem Triangulationsprinzip. \todo{nur einer ist nachfolger}Es sind Nachfolgemodelle der Typen wie die früheren Teams sie verwendeten.
-	\par\todo{Diagramm}
+	Die Infrarot-Sensoren GP2D120 und GP2Y0A02YK von Sharp basieren auf dem Triangulationsprinzip. Es sind Nachfolgemodelle der Typen wie die früheren Teams sie verwendeten.
+	\begin{figure}[H]%H htbp
+		\centering
+		\input{content/image/diag_gp2d120}
+		\caption[Messungen mit dem IR-Sensor GP2D120]{Messungen mit dem Infrarotsensor GP2D120}
+		\label{img:messung-gp2d120}
+	\end{figure}
+	\begin{figure}[H]%H htbp
+		\centering
+		\input{content/image/diag_gp2y0a02yk}
+		\caption[Messungen mit dem IR-Sensor GP2Y0A02YK]{Messungen mit dem Infrarotsensor GP2Y0A02YK}
+		\label{img:messung-gp2y0a02yk}
+	\end{figure}
 	Die im vorherigen Kapitel beschriebenen Probleme wie Aussetzer und Messfehler konnten nicht reproduziert werden. Es gab einige Abweichungen wegen spiegelnder Oberfläche der Objekte, dieses Phänomen ist aber gut nachvollziehbar. Im Diagramm ist jedoch zu erkennen, dass auch bei diesen Sensor-Versionen die in der Thesis beschriebene Problematik der zweideutigen Messresultate \cite{lit:gegnerischer_roboter}  besteht.
 	\section{IS471F}\label{s:is471f}
 	Auch von Sharp, ist der Sensor IS471F. Dabei handelt es sich um ein Bauteil, das in einer einfachen Schaltung als Distanzschalter funktioniert.
 	\image{content/image/is471f}{scale=.5}[Einfache Beispielschaltung mit Sensor IS471F \cite{pic:is471f}][Einfache Beispielschaltung mit Sensor IS471F][pic:is471f]
 	Die im Sensor integrierte Schaltung steuert externe Infrarot-LEDs an. Ist das so modulierte Licht für den Sensor sichtbar, wo liefert dieser einen definierten Pegel, andernfalls den invertierten Pegel. Dies funktioniert nicht nur bei direkter Bestrahlung, wie bei Lichtschranken, sondern auch bei Reflektiertem Licht. Für die Naherkennung könnte also über die Lichtstärke die Schaltdistanz eingestellt werden.
+	\begin{figure}[H]%H htbp
+		\centering
+		\input{content/image/diag_is471f}
+		\caption[Messungen mit dem IR-Sensor IS471F]{Messungen mit dem Infrarotsensor IS471F}
+		\label{img:messung-is471f}
+	\end{figure}
+	\todo{auswertung diagramm}
 	%
 	\section{SRF-Module von Devantech}\label{s:srf-module-von-devantech}
 	Devantech\footnote{\url{http://www.devantech.co.uk/}} entwickelt diverse elektronische Module, darunter befindet sich auch eine Reihe von Ultraschall-Modulen zur Distanzmessung.

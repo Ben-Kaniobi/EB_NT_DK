@@ -1,0 +1,75 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		height=9cm, width=13cm,
+		xlabel=Distanz/m, ylabel=U/V,
+		grid=major,
+		legend style={cells={anchor=west}}]
+	%
+	%\addplot[color=blue,mark=*] coordinates {
+	\addplot coordinates {
+		( 1  , 2.05)
+		( 1.5, 1.86)
+		( 2  , 2.65)
+		( 2.5, 3.06)
+		( 2.7, 3.06)
+		( 3  , 2.96)
+		( 3.5, 2.82)
+		( 4  , 2.54)
+		( 5  , 2.13)
+		( 6  , 1.85)
+		( 7  , 1.62)
+		( 8  , 1.44)
+		(10  , 1.14)
+		(15  , 0.77)
+		(20  , 0.57)
+		(30  , 0.34)
+		(40  , 0.25)
+	};
+	\addlegendentry{Holz}
+	%
+	%\addplot[color=red,mark=square*] coordinates {
+	\addplot coordinates {
+		( 1  , 2.76 )
+		( 1.5, 2.64 )
+		( 2  , 2.56 )
+		( 2.5, 2.57 )
+		( 2.7, 2.54 )
+		( 3  , 2.44 )
+		( 3.5, 2.327)
+		( 4  , 2.11 )
+		( 5  , 1.84 )
+		( 6  , 1.56 )
+		( 7  , 1.39 )
+		( 8  , 1.28 )
+		(10  , 1.05 )
+		(15  , 0.74 )
+		(20  , 0.57 )
+		(30  , 0.44 )
+		(40  , 0.34 )
+	};
+	\addlegendentry{Metall, glänzend}
+	%
+	%\addplot[color=teal,mark=triangle*] coordinates {
+	\addplot coordinates {
+		( 1  , 2.69)
+		( 1.5, 2.22)
+		( 2  , 2.67)
+		( 2.5, 3.02)
+		( 2.7, 3.06)
+		( 3  , 3.01)
+		( 3.5, 2.83)
+		( 4  , 2.51)
+		( 5  , 2.13)
+		( 6  , 1.85)
+		( 7  , 1.63)
+		( 8  , 1.47)
+		(10  , 1.2 )
+		(15  , 0.81)
+		(20  , 0.61)
+		(30  , 0.37)
+		(40  , 0.27)
+	};
+	\addlegendentry{Metall, matt}
+	%
+	\end{axis}
+\end{tikzpicture}

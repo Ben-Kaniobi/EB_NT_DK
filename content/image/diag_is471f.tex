@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		ybar,
+		height=5cm, width=7cm,
+		ylabel=Distanz/m,
+		ymajorgrids=true,
+		enlargelimits=0.4,
+		legend style={
+			cells={anchor=west},
+			legend pos=outer north east
+		},
+		xtick=data,
+		nodes near coords,
+		nodes near coords align={vertical},
+		symbolic x coords={Normale LED, Helle LED}]
+	%
+	\addplot coordinates{(Normale LED, 17) (Helle LED, 35)};
+	\addplot coordinates{(Normale LED, 30) (Helle LED, 47)};
+	\addplot coordinates{(Normale LED, 40) (Helle LED, 52)};
+	\addplot coordinates{(Normale LED, 27) (Helle LED, 37)};
+	\addplot coordinates{(Normale LED,  6) (Helle LED,  9)};
+	\legend{Holz, {Metall, matt}, {Metall, glänzend}, {Metall, eloxiert schwarz}, {Plastik, matt schwarz}}
+	%
+	\end{axis}
+\end{tikzpicture}
