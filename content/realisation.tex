@@ -3,14 +3,64 @@
 % Autor:   Nicola Käser
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Realisation}\label{ch:realisation}
-Bla
 %
 	\section{Hardware}\label{s:hardware}
-		\subsection{Variante 1 - Quadratisch}\label{ss:variante-1--quadratisch}
-		\subsection{Variante 2 - Länglich}\label{ss:variante-2-laenglich}
+	Es wird je ein Ultraschallmodul vorne und eines hinten am Roboter montiert. Die Infrarotsensoren werden auch vorne und hinten, je nach Platz positioniert.
+	Die Ultraschallmodule müssen nur an den \iic-Bus angeschlossen werden und benötigen keine weitere Hardware. Für die Infrarotsensoren ist jedoch eine einfache Schaltung notwendig. Die zwei LEDs werden über ein Trimm-Potentiometer am Sensor angeschlossen, so kann gegebenenfalls die Schaltdistanz herabgesetzt werden.
+	\image{content/image/todo}{scale=1}[Schema für Infrarotsensor][Schema für Infrarotsensor][pic:schema]
+	Da die Schaltung nicht besonders aufwendig ist, sind die Printe als Veroboard-Aufbau realisiert. Auf Wunsch des Volumenkonzept-Teams wurden vorerst zwei Varianten des Printlayouts erstellt, eine quadratische- und eine längliche Version. Da der Platz des kleinen Roboters relativ knapp ist, konnte so die bestmögliche Option ausgewählt werden.
+	\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{.49\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/todo}
+		\captionof{figure}[Hardwarevariante 1 - Quadratisch]{Variante 1 - Quadratisch}
+		\label{pic:hardvarevariante1}
+	\end{minipage}
+	\begin{minipage}[t]{.49\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/todo}
+		\captionof{figure}[Hardwarevariante 2 - Länglich]{Variante 2 - Länglich}
+		\label{pic:hardvarevariante2}
+	\end{minipage}
+	\end{figure}
+	%
+	Schlussendlich wurde zusammen die Entscheidung gefällt vorne die längliche- sowie zweimal die quadratische- und hinten einmal die quadratische Variante zu verwenden.
+	%
 	\section{Software}\label{s:software}
-		\subsection{RTOS}\label{ss:rtos}
-		\subsection{Set\_SRF08\_address}\label{ss:set-srf08-address}
-		\subsection{Task 1}\label{ss:task-1}
-		\subsection{Task 2}\label{ss:task-2}
+	Für die Software wird das Echtzeitbetriebssystem FreeRTOS\footnote{Free real-time operating system} verwendet. Beim kleineren Roboter läuft die Naherkennungs-Software auf dem RoboBoard zusammen mit weiteren Teilgebieten.
+	%
+		\subsection{Set\_SRF08\_address}\label{ss:set_srf08_address}
+		Damit am gleichen \iic-Bus beide Ultraschallsensoren verwendet werden können, musste zuerst eine separate Software zum ändern der Slave-Adresse erstellt werden. Der Ablauf der folgende:
+		\begin{enumerate}
+			\item Überprüffen ob neue Adresse gültig ist. Falls nicht, Programm nicht fortsetzten.
+			\item Erste Prüfsequenz zur Adressänderung via \iic\ an Kommandoregister senden und definierte Zeit warten.
+			\item Zweite Prüfsequenz zur Adressänderung via \iic\ an Kommandoregister senden und definierte Zeit warten.
+			\item Dritte Prüfsequenz zur Adressänderung via \iic\ an Kommandoregister senden und definierte Zeit warten.
+			\item Neue Adresse via \iic\ an Kommandoregister senden.
+			\item Beim Aus- und erneuten Einstecken sollte nun die LED auf dem Modul mit dem zur neuen Adresse gehörenden Code (siehe Spezifikationen \cite{url:spec_srf08}) blinken.
+		\end{enumerate}
+		%
+		Der vordere Sensor behielt seine Standard-Adresse (\hex{E0}), dem hinteren wurde die Adresse \hex{E2} neu zugewiesen.
+		%
+		\subsection{Rangefinder}\label{ss:rangefinder}
+		Für die Naherkennung wurden zwei Task implementiert, einer für die Infrarot- und einer für die Ultraschallsensoren.
+		%
+			\subsubsection{IR-Task}\label{sss:ir-task}
+			Da ein Infrarotsensor lediglich einen GPIO\footnote{General purpose input/output} benötigt, ist der Taskablauf leicht zusammengefasst:
+			\begin{enumerate}
+				\item GPIOs initialisieren.
+				\item Endlosschlaufe des folgenden Ablaufs:
+				\begin{enumerate}
+					\item Alle vier GPIOs lesen.
+					\item Überprüfen ob einer davon ein Hindernis erkennt.
+					\begin{enumerate}
+						\item Falls ein Hindernis erkannt ist, IR-Alarmflag setzen.
+					\end{enumerate}
+					\item Definierte Zeit warten, so dass der Task immer mit dem selben Takt ausgeführt wird.
+				\end{enumerate}
+			\end{enumerate}
+		%
+			\subsubsection{US-Task}\label{sss:us-task}
+		%
 \todo{name allgemein}
