@@ -84,6 +84,7 @@
 ## My additions
 # auto generated
 *.tps
+*.synctex
 
 # windows
 [Tt]humbs.db

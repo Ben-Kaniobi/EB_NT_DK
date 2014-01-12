@@ -13,13 +13,31 @@ Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaluatio
 		\caption[Messungen mit dem IR-Sensor GP2D120]{Messungen mit dem Infrarotsensor GP2D120}
 		\label{img:messung-gp2d120}
 	\end{figure}
+	%
 	\begin{figure}[H]%H htbp
 		\centering
 		\input{content/image/diag_gp2y0a02yk}
 		\caption[Messungen mit dem IR-Sensor GP2Y0A02YK]{Messungen mit dem Infrarotsensor GP2Y0A02YK}
 		\label{img:messung-gp2y0a02yk}
 	\end{figure}
-	Die im vorherigen Kapitel beschriebenen Probleme wie Aussetzer und Messfehler konnten nicht reproduziert werden. Es gab einige Abweichungen wegen spiegelnder Oberfläche der Objekte, dieses Phänomen ist aber gut nachvollziehbar. Im Diagramm ist jedoch zu erkennen, dass auch bei diesen Sensor-Versionen die in der Thesis beschriebene Problematik der zweideutigen Messresultate \cite{lit:gegnerischer_roboter}  besteht.
+	%
+	Die im vorherigen Kapitel beschriebenen Probleme wie Aussetzer und Messfehler konnten nicht reproduziert werden. Es gab einige Abweichungen wegen spiegelnder Oberfläche der Objekte, dieses Phänomen ist aber gut nachvollziehbar. Im Diagramm ist jedoch zu erkennen, dass auch bei diesen Sensor-Versionen die in der Thesis beschriebene Problematik der zweideutigen Messresultate \cite{lit:gegnerischer_roboter} besteht.
+	\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{.49\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/gp2d120}
+		\captionof{figure}[GP2D120]{GP2D120 \cite{pic:sharp}}
+		\label{pic:gp2d120}
+	\end{minipage}
+	\begin{minipage}[t]{.49\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/gp2y0a02yk}
+		\captionof{figure}[GP2Y0A02YK]{GP2Y0A02YK \cite{pic:sharp}}
+		\label{pic:gp2y0a02yk}
+	\end{minipage}
+	\end{figure}
+	%
 	\section{IS471F}\label{s:is471f}
 	Auch von Sharp, ist der Sensor IS471F. Dabei handelt es sich um ein Bauteil, das in einer einfachen Schaltung als Distanzschalter funktioniert.
 	\image{content/image/is471f}{scale=.5}[Einfache Beispielschaltung mit Sensor IS471F \cite{pic:is471f}][Einfache Beispielschaltung mit Sensor IS471F][pic:is471f]
@@ -30,13 +48,73 @@ Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaluatio
 		\caption[Messungen mit dem IR-Sensor IS471F]{Messungen mit dem Infrarotsensor IS471F}
 		\label{img:messung-is471f}
 	\end{figure}
-	\todo{auswertung diagramm}
+	Auch hier sind Abweichungen bezüglich des Materials/Oberfläche festzustellen. Es ist ausserdem gut zu erkennen, dass die Helligkeit der LEDs Einfluss auf die Schaltdistanz hat. Mit einer Hellen LED (SFH 485-2) konnte auch die gemessene Distanz zu einer Holzoberfläche über \SI{20}{\centi\meter} gehoben werden.
 	%
 	\section{SRF-Module von Devantech}\label{s:srf-module-von-devantech}
+	\begin{figure}[H]
+	\centering
+	\begin{minipage}[t]{.3\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/srf02}
+		\captionof{figure}{SRF02}
+		\label{pic:srf02}
+	\end{minipage}
+	\begin{minipage}[t]{.3\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/srf08}
+		\captionof{figure}{SRF08}
+		\label{pic:srf08}
+	\end{minipage}
+	\begin{minipage}[t]{.3\textwidth}
+		\centering
+		\includegraphics[scale=.2]{content/image/srf10}
+		\captionof{figure}{SRF10}
+		\label{pic:srf10}
+	\end{minipage}
+	\end{figure}
+	%
 	Devantech\footnote{\url{http://www.devantech.co.uk/}} entwickelt diverse elektronische Module, darunter befindet sich auch eine Reihe von Ultraschall-Modulen zur Distanzmessung.
-	Die \ttodo{blablabla} bla von 
+	Für die Evaluation wurden drei Typen im \SI{40}{\kilo\hertz}-Bereich ausgewählt. Diese lassen sich alle mit \iic\ ansteuern und verwenden die gleiche Kommunikation, die Ansteuerung aller Sensoren ist also mit der gleichen Software möglich. Ausgelesen können Werte in Zentimeter, Inch und Milisekunden.
+	%
 		\subsection{SRF02}
+		Der Typ SRF02 weist die kleinste Bauform auf. Das Modul besteht nicht aus separatem Ultraschallsender und -empfänger, sondern die beiden Elemente sind in einem kombiniert. Der Erfassungsbereich wird vom Hersteller mit 55° angegeben \cite{url:spec_srf02}. Bei diesem Modul wäre zusätzlich zu \iic\ eine Ansteuerung mit RS-232 möglich, welche jedoch nicht getestet wurde.
+		\begin{figure}[H]%H htbp
+			\centering
+			\input{content/image/diag_srf02}
+			\caption[Messungen mit dem Ultraschallsensor SRF02]{Messungen mit dem Ultraschallsensor SRF02}
+			\label{img:messung-srf02}
+		\end{figure}
+		%
+		Im Diagramm sind kleine Unterschiede, abhängig von der Objektgeometrie, erkennbar. Im Allgemeinen wird die Distanz jedoch relativ zuverlässig gemessen. Gut erkennbar ist auch, dass zu kleine Distanzen (nicht im Messbereich des Sensors) trotzdem noch erkannt werden und den Mimimalwert anzeigen. Beim Messen gab es ein paar Ausreisser die erneut gemessen werden mussten.
+		%
 		\subsection{SRF08}
+		Dieses Modul ist das grösste der evaluierten Modulen von Devantech. Auch hier wird der Erfassungsbereich mit 55° angegeben \cite{url:spec_srf08}.
+		Zusätzlich zum Ultraschallsender und -empfänger befindet sich auch eine Fotodiode auf dem Print. Diese könnte auch per \iic\ ausgelesen werden, wurde jedoch nicht getestet.
+		\begin{figure}[H]%H htbp
+			\centering
+			\input{content/image/diag_srf08}
+			\caption[Messungen mit dem Ultraschallsensor SRF08]{Messungen mit dem Ultraschallsensor SRF08}
+			\label{img:messung-srf08}
+		\end{figure}
+		Dieser Sensor lieferte die besten Messergebnisse der Devantech-Ultraschallmodule. Dies ist auch im Diagramm erkennbar, es waren nur geringe Abweichungen feststellbar.
+		%
 		\subsection{SRF10}
+		Beim Typ SRF10 ist die Bauform gleich wie beim SRF08, jedoch ist der Ultraschallsender und -empfänger kleiner. Der Erfassungsbereich ist grösser als bei den anderen beiden Modulen, laut Hersteller 75° \cite{url:spec_srf10}.
+		\begin{figure}[H]%H htbp
+			\centering
+			\input{content/image/diag_srf10}
+			\caption[Messungen mit dem Ultraschallsensor SRF10]{Messungen mit dem Ultraschallsensor SRF10}
+			\label{img:messung-srf10}
+		\end{figure}
+		Dass bei diesem Modul der Erfassungsbereich grösser ist, als bei den anderen beiden Modulen war beim Messen gut feststellbar. Es musste öfters eine Messung wiederholt werden, da die Distanz zur Seitenwand oder zu anderen Objekten seitlich in der Nähe gemessen wurde statt die Distanz geradeaus zum Messobjekt. Wie im Diagramm erkennbar ist, wurde der \SI{3}{\centi\meter}-Holzklotz nur in \SI{2}{\meter} erkannt. Grund dafür könnte die, im Gegensatz zu den anderen Modulen, höhere Positionierung sein, die aufgrund der vorher beschriebenen Messschwierigkeiten vorgenommen wurde.
+		%
 	\section{Lasersensor von Baumer}\label{s:lasersensor-von-baumer}
-	Der Sensor OADM 13U7480/S35A von Baumer\footnote{\url{http://www.baumer.com/ch-de/}}
+	Der Sensor OADM 13U7480/S35A von Baumer\footnote{\url{http://www.baumer.com/ch-de/}} wurde bereits vom letztjährigen Team evaluiert, und für den "`Gegnerischen Roboter"' verwendet \cite{lit:gegnerischer_roboter}. Aus diesem Grund wurde keine erneute vollständige Evaluation, sonder lediglich eine Inbetriebnahme durchgeführt.
+	\par Der Lasersensor liefert genaue Messergebnisse, diese sind jedoch nur punktuell. Aus diesem Grund wurde in der vorher genannten Thesisarbeit drei dieser Sensoren verwendet \cite{lit:gegnerischer_roboter}.
+	%
+	\section{Entscheidung}\label{s:entscheidung}
+	Zur Entscheidungsfindung für den optimalen Sensortypen wurde eine Nutzwertanalyse gemacht:
+	\input{content/nutzwertanalyse}
+	%
+	Nach dieser Analyse ist ersichtlich, dass sich das Ultraschallsensor-Modul SRF08 von Devantech am Besten für die Naherkennung eignet. Auch hohe Wertung hat der Sensor IS471F von Sharp, sowie ein weiteres Ultraschall-Modul SRF02. Ich habe mich desshalb entschieden, für die Naherkennung das Modul SRF08 und zusätzlich als zweite Absicherung den Sensor IS471F zu verwenden. So können die Nachteile beider Sensoren durch den anderen ausgeglichen werden.
+	%

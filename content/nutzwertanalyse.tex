@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titel:   Nutzwertanalyse
+% Autor:   Nicola Käser
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+	% Lokale Commands (nur gültig bis \end{table})
+	\newcommand{\R}[1]{\rotatebox{90}{#1}}  % 90° rotierte Zelle
+	\newcommand{\T}[1]{\R{\textcolor{white}{\textbf{#1}}}}  % Titel, rotiert
+	\newcommand{\mc}[1]{\multicolumn{2}{c|}{#1}}  % Zwei Zellen zusammengefasst
+	\newcommand{\Tc}[1]{\mc{\T{#1}}}  % Titel, rotiert, zwei Zellen zusammengefasst
+	\newcommand{\e}{\multicolumn{1}{c|}{\cellcolor{white}{~}}}  % Weisse Zelle ohne Linie links & oben
+	\newcommand{\n}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}  % Spezielle Zelle in der Umruch (\\) verwendet werden kann
+	\definecolor{lightgreen}{HTML}{80FF80}
+	\newcommand{\cA}[1]{\cellcolor{green}{#1}}  % Zellenfarbe 1
+	\newcommand{\cB}[1]{\cellcolor{lightgreen}{#1}}  % Zellenfarbe 2
+	%
+	\centering
+	% Schriftgrösse etwas kleiner, damit gesammte Tabelle auf Seite passt
+	\KOMAoptions{fontsize=10pt}
+	\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\cline{2-16}\rowcolor{bfhblue}
+	\e               & \T{Gewichtung} & \Tc{A: GP2D120} & \Tc{B: GP2Y0A02YK} & \Tc{C: IS471F} & \Tc{D: SRF02} & \Tc{E: SRF08} & \Tc{F: SRF10} & \Tc{G: OADM} \\ \hline
+	\textbf{Kriterien}      & \R{X} & \R{A} & \R{A*X } & \R{B} & \R{B*X } & \R{C} & \R{C*X } & \R{D} & \R{D*X } & \R{E} & \R{E*X } & \R{F} & \R{F*X } & \R{G} & \R{G*X } \\ \hline
+	\n{Genau-\\igkeit}      & 9     & 7     & 63       & 8     & 72       & 2     & 18       & 8     & 72       & 9     & 81       & 8     & 72       & 10    & 90       \\ \hline
+	\n{Zuverläs-\\sigkeit}  & 10    & 5     & 50       & 4     & 40       & 8     & 80       & 6     & 60       & 8     & 80       & 4     & 40       & 8     & 80       \\ \hline
+	\n{Geschwin-\\digkeit}  & 5     & 8     & 40       & 8     & 40       & 8     & 40       & 5     & 25       & 5     & 25       & 5     & 25       & 10    & 50       \\ \hline
+	\n{Platz-\\bedarf}      & 7     & 7     & 49       & 6     & 42       & 9     & 63       & 8     & 56       & 6     & 42       & 8     & 56       & 1     & 7        \\ \hline
+	\n{Energie-\\verbrauch} & 2     & 8     & 16       & 8     & 16       & 9     & 18       & 8     & 16       & 8     & 16       & 8     & 16       & 4     & 8        \\ \hline
+	\n{Sicher-\\heit}       & 8     & 10    & 80       & 10    & 80       & 10    & 80       & 10    & 80       & 10    & 80       & 10    & 80       & 5     & 40       \\ \hline
+	\n{Ansteu-\\erung}      & 3     & 5     & 15       & 5     & 15       & 6     & 18       & 6     & 18       & 6     & 18       & 6     & 18       & 5     & 15       \\ \hline
+	\n{Kosten-\\aufwand}    & 4     & 7     & 28       & 6     & 24       & 10    & 40       & 7     & 28       & 6     & 24       & 6     & 24       & 2     & 8        \\ \hline\hline
+	\textbf{Summe}          & 48    & 57    & 341      & 55    & 329      & 62    & \cB{357} & 58    & \cB{355} & 58    & \cA{366} & 55    & 331      & 45    & 298      \\ \hline
+	\end{tabular}
+	% Schriftgrösse zurücksetzten
+	\KOMAoptions{fontsize=\defaultfontsize}
+	\caption{Nutzwertanalyse zur Auswahl des optimalen Sensortyps}
+	\label{tab:nutzwertanalyse}
+\end{table}

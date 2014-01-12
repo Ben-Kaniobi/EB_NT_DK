@@ -204,7 +204,7 @@
 % \cite als \oldcite speichern
 \let\oldcite\cite
 % \cite neu definieren, sodass Zähler jedesmal inkrementiert wird
-\renewcommand\cite[1]{\oldcite{#1} \stepcounter{numcite}}
+\renewcommand\cite[1]{\oldcite{#1}\stepcounter{numcite}}
 
 
 
