@@ -56,11 +56,38 @@
 					\item Überprüfen ob einer davon ein Hindernis erkennt.
 					\begin{enumerate}
 						\item Falls ein Hindernis erkannt ist, IR-Alarmflag setzen.
+						\item Andernfalls IR-Alarmflag zurücksetzen.
 					\end{enumerate}
-					\item Definierte Zeit warten, so dass der Task immer mit dem selben Takt ausgeführt wird.
+					\item Definierte Zeit warten, so dass der Task immer im gleichen Takt ausgeführt wird.
 				\end{enumerate}
 			\end{enumerate}
-		%
+			%
 			\subsubsection{US-Task}\label{sss:us-task}
+			Der Task für die Ultraschallsensoren ist etwas komplizierter, wesshalb die Darstellung als Flussdiagram besser geeignet ist. Für den \iic-Zugriff wurde das Mutex-Verfahren verwendet, zur Überschaubarkeit zeigen die Diagramme diesen Teil jedoch nicht.
+			\image{content/image/flussdiagramm_us-task}{scale=1}[Flussdiagramm des US-Tasks][Flussdiagramm des US-Tasks][pic:flussdiagramm_us-task]
+			\clearpage
+			%
+				\paragraph{Funktion setSRF08Range und setSRF08Gain}\label{par:setsrf08range_setsrf08gain}
+				\ttodo{bla}
+				\begin{figure}[H]
+				\centering
+				\begin{minipage}[t]{.49\textwidth}
+					\centering
+					\includegraphics[scale=1]{content/image/flussdiagramm_setsrf08range}
+					\captionof{figure}[Flussdiagramm der Funktion setSRF08Range]{Flussdiagramm der\newline Funktion setSRF08Range}
+					\label{pic:flussdiagramm_setsrf08range}
+				\end{minipage}
+				\begin{minipage}[t]{.49\textwidth}
+					\centering
+					\includegraphics[scale=1]{content/image/flussdiagramm_setsrf08gain}
+					\captionof{figure}[Flussdiagramm der Funktion setSRF08Gain]{Flussdiagramm der\newline Funktion setSRF08Gain}
+					\label{pic:flussdiagramm_setsrf08gain}
+				\end{minipage}
+				\end{figure}
+				%
+				\paragraph{Funktion startSRF08Meas und readSRF08Meas}\label{par:startsrf08meas_readsrf08meas}
+				\ttodo{bla}
+				\image{content/image/flussdiagramm_startsrf08meas}{scale=1}[Flussdiagramm der Funktion startSRF08Meas][Flussdiagramm der Funktion startSRF08Meas][pic:flussdiagramm_startsrf08meas]
+				%
+				\image{content/image/flussdiagramm_readsrf08meas}{scale=1}[Flussdiagramm der Funktion readSRF08Meas][Flussdiagramm der Funktion readSRF08Meas][pic:flussdiagramm_readsrf08meas]
 		%
-\todo{name allgemein}
