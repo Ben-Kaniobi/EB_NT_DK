@@ -6,6 +6,7 @@
 \usepackage{lmodern}            % Darstellung
 \usepackage{wasysym}            % Spezielle Symbole
 \usepackage{todonotes}          % ToDo-Notizen
+\usepackage{perpage}
 %\usepackage{calc}               % Erweiterte Berechnungen/Text messen
 %\usepackage{amsmath}  % Math
 %\usepackage[final]{pdfpages}   % PDF einbinden
@@ -13,7 +14,9 @@
 \title{Testprotokoll Rangefinder}
 \subtitle{Blackboxtest Version 1.0}
 \author{N. Käser}
-\date{\textcolor{orange}{z.B. 6. Januar 2014}}%\today}
+\date{14. Januar 2014}
+
+\MakePerPage{footnote}
 
 \newcommand{\hardwareinfo}{STM32 F4 Discovery Board mit RoboBoard}
 \newcommand{\hex}[1]{#1\textsubscript{hex}}%h}}%(16)}}
@@ -22,7 +25,13 @@
 \newcommand{\platz}{\textcolor{white}{$\Box$}}
 \newcommand{\leer}{$\Box$}
 \newcommand{\ok}{$\CheckedBox$}
-\newcommand{\nok}{\textcolor{red}{\leer}}
+\newcommand{\nok}[1]{#1}%\mbox{\ooalign{\leer\cr\hidewidth \textcolor{red}{#1}\hidewidth\cr}}}
+
+
+% Punktstyles global ändern
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemiii}{$\cdot$}
+
 
 \begin{document}
 \maketitle%\todo{Datum der Testdurchführung}
@@ -34,11 +43,8 @@
 			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill \ok\platz%
 		\end{itemize}
 	\subsection{SRF08 Adresse ändern}
-		Nach erfolgreicher Adressänderung leuchtet die LED ununterbrochen. Die aktuelle Adresse ist dann durch den Blinkcode beim Einstecken erkennbar.
+		Nach erfolgreicher Adressänderung leuchtet die LED des Ultraschallmoduls ununterbrochen. Die aktuelle Adresse ist dann durch den Blinkcode beim erneuten Einstecken erkennbar.
 		\begin{itemize}
-		% Punktstyles ändern
-		\renewcommand{\labelitemii}{$\circ$}
-		\renewcommand{\labelitemiii}{$\cdot$}
 			\item Falsche Adresse wird nicht geschrieben
 			\begin{itemize}
 				\item Nicht im gültigen Bereich:
@@ -71,9 +77,9 @@
 		\begin{itemize}
 			\item Sensoren lösen bei Hindernis Alarm aus:
 			\begin{itemize}
-				\item Sensor links\dotfill \nok\ok
-				\item Sensor mitte\dotfill \nok\ok
-				\item Sensor rechts\dotfill \nok\ok
+				\item Sensor links\dotfill \nok{A}\ok
+				\item Sensor mitte\dotfill \nok{A}\ok
+				\item Sensor rechts\dotfill \nok{A}\ok
 				\item Sensor hinten\dotfill \ok\ok
 			\end{itemize}
 			\item Sensoren setzen ohne Hindernis Alarm zurück:
@@ -98,14 +104,25 @@
 				\item Sensor vorne\dotfill \ok\ok
 				\item Sensor hinten\dotfill \ok\ok
 			\end{itemize}
-			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \nok\nok
+			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \nok{B}\nok{B}
 		\end{itemize}
 		%
+	\clearpage
 	\subsection{Notizen}
-		A. Bla bla
+		\begin{enumerate}
+			% Enumerationsstyle ändern
+			\renewcommand{\labelenumi}{\Alph{enumi}.}
+			\item Bei einem Hindernis der Sensoren wurde kein Alarm ausgelöst.
+			\item Angeschlossener Sensor liefert immer gleichen Wert.
+		\end{enumerate}
 		%
-	\subsection{Fazit}\todo{Evtl. mit Notizen zusammen wegen Platz}
-		Das Verhalten bei Notiz A war voraussehbar und stört die Bedienbarkeit nicht. Wird ignoriert.
+	\subsection{Fazit}
+		\begin{enumerate}
+			% Enumerationsstyle ändern
+			\renewcommand{\labelenumi}{\Alph{enumi}.}
+			\item Es wurden OR- statt AND-Verknüpfungen gebraucht. (Die IR-Sensoren sind low-aktiv\footnote{HIGH: Kein Objekt detektiert; LOW: Objekt detektiert}.) Fehler wurde behoben.
+			\item In der I\textsuperscript{2}C-Implementation der Vorgänger\footnote{File "`i2c.c"'} werden mit \textit{while}-Schlaufen die Buszustände geprüfft. Dies konnte zu Endlosschlaufen führen. Zum Beheben wurden schon vor dem Test Timeout-Variablen hinzugefügt. Auch manuelles Löschen des Busy-Flags\footnote{Das Busy-Flag ist gesetzt während der Bus gerade für eine Übertragung verwendet wird.} wäre in diesem Fall notwendig, das Flag kann nur gelesen werden (readonly). Der Fehler kann somit nicht behoben werden. Dies ist jedoch nicht allzu schlimm, da eigentlich sowieso immer Beide Sensoren angeschlossen sein sollten.
+		\end{enumerate}
 		%
 \end{document}
 
