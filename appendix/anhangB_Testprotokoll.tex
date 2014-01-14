@@ -13,10 +13,16 @@
 \title{Testprotokoll Rangefinder}
 \subtitle{Blackboxtest Version 1.0}
 \author{N. Käser}
-\date{z.B. 6. Januar 2014}%\today}
+\date{\textcolor{orange}{z.B. 6. Januar 2014}}%\today}
 
 \newcommand{\hardwareinfo}{STM32 F4 Discovery Board mit RoboBoard}
 \newcommand{\hex}[1]{#1\textsubscript{hex}}%h}}%(16)}}
+
+% Checkboxen
+\newcommand{\platz}{\textcolor{white}{$\Box$}}
+\newcommand{\leer}{$\Box$}
+\newcommand{\ok}{$\CheckedBox$}
+\newcommand{\nok}{\textcolor{red}{\leer}}
 
 \begin{document}
 \maketitle%\todo{Datum der Testdurchführung}
@@ -25,10 +31,10 @@
 \section{Software Set\_SRF08\_Address}
 	\subsection{Allgemein}
 		\begin{itemize}
-			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill $\Box$$\Box$%$\CheckedBox$
+			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill \ok\platz%
 		\end{itemize}
 	\subsection{SRF08 Adresse ändern}
-		Die aktuelle Adresse eines Moduls ist durch den Blinkcode beim Einstecken erkennbar. So kann jeweils überprüft werden, ob eine Adressänderung erfolgreich war.
+		Nach erfolgreicher Adressänderung leuchtet die LED ununterbrochen. Die aktuelle Adresse ist dann durch den Blinkcode beim Einstecken erkennbar.
 		\begin{itemize}
 		% Punktstyles ändern
 		\renewcommand{\labelitemii}{$\circ$}
@@ -37,25 +43,21 @@
 			\begin{itemize}
 				\item Nicht im gültigen Bereich:
 				\begin{itemize}
-					\item \hex{00}\dotfill $\Box$$\Box$%$\CheckedBox$
-					\item \hex{DE}\dotfill $\Box$$\Box$%$\CheckedBox$
+					\item \hex{00}\dotfill \ok\platz
+					\item \hex{DE}\dotfill \ok\platz
 				\end{itemize}
 				\item Ungerade:
 				\begin{itemize}
-					\item \hex{E5}\dotfill $\Box$$\Box$%$\CheckedBox$
-					\item \hex{FB}\dotfill $\Box$$\Box$%$\CheckedBox$
+					\item \hex{E5}\dotfill \ok\platz
+					\item \hex{FB}\dotfill \ok\platz
 				\end{itemize}
 			\end{itemize}
 			\item Gültige Adresse wird geschrieben:
 			\begin{itemize}
-				\item \hex{FE}\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item \hex{E0}\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item \hex{FE}\dotfill \ok\platz
+				\item \hex{E0}\dotfill \ok\platz
 			\end{itemize}
-			\item Neue Adresse kann danach verwendet werden:
-			\begin{itemize}
-				\item \hex{FE}\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item \hex{E0}\dotfill $\Box$$\Box$%$\CheckedBox$
-			\end{itemize}
+			\item Erneute Adressänderung ist möglich (= neue Adresse funktioniert)\dotfill \ok\platz
 		\end{itemize}
 		%
 		\clearpage
@@ -63,40 +65,40 @@
 \section{Software Rangefinder}
 	\subsection{Allgemein}
 		\begin{itemize}
-			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill $\Box$$\Box$%$\CheckedBox$
+			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill \ok\ok
 		\end{itemize}
 	\subsection{Infrarot Task}
 		\begin{itemize}
 			\item Sensoren lösen bei Hindernis Alarm aus:
 			\begin{itemize}
-				\item Sensor links\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor mitte\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor rechts\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor links\dotfill \nok\ok
+				\item Sensor mitte\dotfill \nok\ok
+				\item Sensor rechts\dotfill \nok\ok
+				\item Sensor hinten\dotfill \ok\ok
 			\end{itemize}
 			\item Sensoren setzen ohne Hindernis Alarm zurück:
 			\begin{itemize}
-				\item Sensor links\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor mitte\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor rechts\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor links\dotfill \ok\ok
+				\item Sensor mitte\dotfill \ok\ok
+				\item Sensor rechts\dotfill \ok\ok
+				\item Sensor hinten\dotfill \ok\ok
 			\end{itemize}
-			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill $\Box$$\Box$%$\CheckedBox$
+			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \ok\ok
 		\end{itemize}
 		%
 	\subsection{Ultraschall Task}
 		\begin{itemize}
 			\item Sensoren lösen bei Hindernis (näher als definiert) Alarm aus:
 			\begin{itemize}
-				\item Sensor vorne\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor vorne\dotfill \ok\ok
+				\item Sensor hinten\dotfill \ok\ok
 			\end{itemize}
 			\item Sensoren setzen ohne Hindernis Alarm zurück:
 			\begin{itemize}
-				\item Sensor vorne\dotfill $\Box$$\Box$%$\CheckedBox$
-				\item Sensor hinten\dotfill $\Box$$\Box$%$\CheckedBox$
+				\item Sensor vorne\dotfill \ok\ok
+				\item Sensor hinten\dotfill \ok\ok
 			\end{itemize}
-			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill $\Box$$\Box$%$\CheckedBox$
+			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \nok\nok
 		\end{itemize}
 		%
 	\subsection{Notizen}
