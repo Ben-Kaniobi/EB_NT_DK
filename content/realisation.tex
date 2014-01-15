@@ -8,24 +8,29 @@
 	Es wird je ein Ultraschallmodul vorne und eines hinten am Roboter montiert. Die Infrarotsensoren werden auch vorne und hinten, je nach Platz positioniert.
 	Die Ultraschallmodule müssen nur an den \iic-Bus angeschlossen werden und benötigen keine weitere Hardware. Für die Infrarotsensoren ist jedoch eine einfache Schaltung notwendig. Die zwei LEDs werden über ein Trimm-Potentiometer am Sensor angeschlossen, so kann gegebenenfalls die Schaltdistanz herabgesetzt werden.
 	\image{content/image/ir-schema}{scale=.4}[Schema für Infrarotsensor][Schema für Infrarotsensor][pic:schema]
-	Da die Schaltung nicht besonders aufwendig ist, sind die Printe als Veroboard-Aufbau realisiert. Auf Wunsch des Volumenkonzept-Teams wurden vorerst zwei Varianten des Printlayouts erstellt, eine quadratische- und eine längliche Version. Da der Platz des kleinen Roboters relativ knapp ist, konnte so die bestmögliche Option ausgewählt werden.
+	Da die Schaltung nicht besonders aufwendig ist, sind die Printe als Veroboard-Aufbau realisiert. Auf Wunsch des Volumenkonzept-Teams wurden vorerst zwei Varianten des Printlayouts erstellt, eine quadratische- und eine schmale Version. Da der Platz des kleinen Roboters relativ knapp ist, konnte so die bestmögliche Option ausgewählt werden.
 	\begin{figure}[H]
 	\centering
 	\begin{minipage}[t]{.49\textwidth}
 		\centering
-		\includegraphics[scale=.2]{content/image/todo}
+		\includegraphics[scale=.19]{content/image/hw_quadratisch}
 		\captionof{figure}[Hardwarevariante 1 - Quadratisch]{Variante 1 - Quadratisch}
 		\label{pic:hardvarevariante1}
 	\end{minipage}
 	\begin{minipage}[t]{.49\textwidth}
 		\centering
-		\includegraphics[scale=.2]{content/image/todo}
-		\captionof{figure}[Hardwarevariante 2 - Länglich]{Variante 2 - Länglich}
+		\includegraphics[scale=.19]{content/image/hw_schmal}
+		\captionof{figure}[Hardwarevariante 2 - Schmal]{Variante 2 - Schmal}
 		\label{pic:hardvarevariante2}
 	\end{minipage}
 	\end{figure}
 	%
-	Schlussendlich wurde zusammen die Entscheidung gefällt vorne die längliche- sowie zweimal die quadratische- und hinten einmal die quadratische Variante zu verwenden.
+	Schlussendlich wurde zusammen die Entscheidung gefällt beide Varianten zu verwenden. Folgende Konstellation erwies sich als passend:
+	
+	\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries Quadratische Version:},noitemsep]
+		\item[Schmale Version:] Vorne mittig
+		\item[Quadratische Version:] Hinten mittig, vorne rechts und links
+	\end{description}
 	%
 	\section{Software}\label{s:software}
 	Für die Software wird das Echtzeitbetriebssystem FreeRTOS\footnote{Free real-time operating system} verwendet. Beim kleineren Roboter läuft die Naherkennungs-Software auf dem RoboBoard zusammen mit weiteren Teilgebieten.
@@ -63,31 +68,27 @@
 			\end{enumerate}
 			%
 			\subsubsection{US-Task}\label{sss:us-task}
-			Der Task für die Ultraschallsensoren ist etwas komplizierter, wesshalb die Darstellung als Flussdiagram besser geeignet ist. Für den \iic-Zugriff wurde das Mutex-Verfahren verwendet, zur Überschaubarkeit zeigen die Diagramme diesen Teil jedoch nicht.
+			Der Task für die Ultraschallsensoren ist etwas komplizierter, wesshalb die Darstellung als Flussdiagram besser geeignet ist. Für den \iic-Zugriff wurde das Mutex-Verfahren\footnote{Mit dem Mutex-Verfahren kann der gleichzeitige Zugriff mehrerer Tasks auf die selbe Schnittstelle verhindert werden.} verwendet, zur Überschaubarkeit zeit das Diagramm diesen Teil jedoch nicht.
 			\image{content/image/flussdiagramm_us-task}{scale=1}[Flussdiagramm des US-Tasks][Flussdiagramm des US-Tasks][pic:flussdiagramm_us-task]
 			\clearpage
 			%
 				\paragraph{Funktion setSRF08Range und setSRF08Gain}\label{par:setsrf08range_setsrf08gain}
-				\ttodo{bla}
-				\begin{figure}[H]
-				\centering
-				\begin{minipage}[t]{.49\textwidth}
-					\centering
-					\includegraphics[scale=1]{content/image/flussdiagramm_setsrf08range}
-					\captionof{figure}[Flussdiagramm der Funktion setSRF08Range]{Flussdiagramm der\newline Funktion setSRF08Range}
-					\label{pic:flussdiagramm_setsrf08range}
-				\end{minipage}
-				\begin{minipage}[t]{.49\textwidth}
-					\centering
-					\includegraphics[scale=1]{content/image/flussdiagramm_setsrf08gain}
-					\captionof{figure}[Flussdiagramm der Funktion setSRF08Gain]{Flussdiagramm der\newline Funktion setSRF08Gain}
-					\label{pic:flussdiagramm_setsrf08gain}
-				\end{minipage}
-				\end{figure}
+				Diese Funktionen dienen dem einmaligen Einstellen der maximalen Reichweite und Verstärkung. 
 				%
-				\paragraph{Funktion startSRF08Meas und readSRF08Meas}\label{par:startsrf08meas_readsrf08meas}
-				\ttodo{bla}
-				\image{content/image/flussdiagramm_startsrf08meas}{scale=1}[Flussdiagramm der Funktion startSRF08Meas][Flussdiagramm der Funktion startSRF08Meas][pic:flussdiagramm_startsrf08meas]
+				\par Für die \textbf{Reichweite} wird zuerst der übergebene Wert auf den zulässigen Bereich angepasst. Anschliessend wird der Registerwert mit folgender Formel berechnet und per \iic\ an das Modul geschickt. Für dieses Projekt wird momentan der Standardwert verwendet.
+				\formula{
+					x&=\frac{s - \SI{43}{\milli\meter}}{\SI{43}{\milli\meter}}
+				}{
+					$x$ & Registerwert (\SI{1}{Byte})\\
+					$s$ & Reichweite in Millimeter
+				}[eq:gain]
+				Als maximale Reichweite wird in dieser Version \SI{1}{\meter} verwendet. Im Header-File\footnote{"`src/application/Rangefinder.h"'} ist dafür ein Makro\footnote{"`RANGEFINDER\_RANGE"'} definiert mit dem der Werte schnell angepasst werden kann.
 				%
-				\image{content/image/flussdiagramm_readsrf08meas}{scale=1}[Flussdiagramm der Funktion readSRF08Meas][Flussdiagramm der Funktion readSRF08Meas][pic:flussdiagramm_readsrf08meas]
+				\par Der Registerwert der \textbf{Verstärkung} kann durch Probieren auf die Anwendung angepasst werden. In der Funktion wird wie bei der Reichweite zuerst der Wert überprüft, gegebenenfalls angepasst und dann an das Modul geschickt.
+				%
+				\paragraph{Funktion startSRF08Meas und readSRF08Meas}\label{par:startsrf08meas_readsrf08meas} Diese Funktionen dienen zur Durchführung einer Messung.
+				%
+				\par Mit der Funktion \textbf{startSRF08Meas} wird das Kommando zum Starten der Messung in Millimeter per \iic\ an das Modul geschickt. Danach muss eine gewisse Zeit gewartet werden, da das Modul die Echos abwartet und in dieser Zeit nicht verwendet werden kann. Für das Modul SRF08 mit Standardverstärkung ist diese Zeit \SI{65}{\milli\second}.\par Nach dem Warten liefert die Funktion \textbf{readSRF08Meas} die gemessene Distanz in Millimeter. Das Modul sendet den Wert in zwei Byte, diese müssen also noch zusammengefügt werden.
+				%\image{content/image/flussdiagramm_readsrf08meas}{scale = 1, trim = 0 25px 0 25px, clip}[Flussdiagramm der Funktion readSRF08Meas][Flussdiagramm der Funktion readSRF08Meas][pic:flussdiagramm_readsrf08meas]
+				\missingfigure{Flussdiagramm enthält Fehler!}
 		%
