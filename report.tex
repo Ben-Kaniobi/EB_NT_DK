@@ -347,14 +347,8 @@
 % Kontrolle
 \input{content/kontrolle}
 %
-% Ergebnisse
-\input{content/ergebnis}
-%
-% Pendenzen
-\input{content/pendenzen}
-%
-% Schlussfolgerung
-\input{content/schlusswort}
+% Schlusskapitel
+\input{content/auswertung}
 %
 %
 %
@@ -363,15 +357,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \KOMAoptions{listof=leveldown}  % Verzeichnisse als Section statt Kapitel
 %
+% List of figures as Section
+%\renewcommand\listoffigures{%
+	%\section{\listfigurename}% Used to be \chapter{\listfigurename}
+		%%\@mkboth{\MakeUppercase\listfigurename}%
+			%%{\MakeUppercase\listfigurename}%
+	%\@starttoc{lof}%
+%}
+%
+% List of tables as Section
+%\renewcommand\listoftables{%
+	%\section{\listtablename}% Used to be \chapter{\listfigurename}
+		%\@mkboth{\MakeUppercase\listtablename}%
+			%{\MakeUppercase\listtablename}%
+	%\@starttoc{lot}%
+%}
+%
 \ifthenbool{createLists}{
 	% Kapitel ohne Nummerierung, aber in Inhaltsverzeichnis
 	\chapternn{Abbildungs- und Tabellenübersicht}
 	%
 	% Abbildungsverzeichnis
 	\listoffigures
+	\todo{section not chapter}
 	%
 	% Tabellenverzeichnis
 	\listoftables
+	\todo{section not chapter}
 }
 %
 %
