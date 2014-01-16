@@ -5,7 +5,7 @@
 \begin{tikzpicture}
 	\begin{axis}[
 		height=9cm, width=13cm,
-		xlabel=Distanz/m, ylabel=Gemessene Distanz/cm,
+		xlabel=Distanz/cm, ylabel=Gemessene Distanz/cm,
 		grid=major,
 		legend style={
 			cells={anchor=west},
@@ -14,42 +14,42 @@
 	%
 	%\addplot[color=blue,mark=*] coordinates {
 	\addplot coordinates {
-		(0.01,  13)
-		(0.03,  13)
-		(0.05,  13)
-		(0.10,  13)
-		(0.20,  21)
-		(0.40,  38)
-		(0.60,  58)
-		(1.20, 119)
-		(1.50, 149)
-		(2.00, 198)
+		(  1,  13)
+		(  3,  13)
+		(  5,  13)
+		( 10,  13)
+		( 20,  21)
+		( 40,  38)
+		( 60,  58)
+		(120, 119)
+		(150, 149)
+		(200, 198)
 	};
 	\addlegendentry{Alublech}
 	%
 	%\addplot[color=red,mark=square*] coordinates {
 	\addplot coordinates {
-		(0.01,  13)
-		(0.03,  13)
-		(0.05,  13)
-		(0.10,  13)
-		(0.20,  20)
-		(0.40,  40)
-		(0.60,  62)
-		(1.20, 120)
-		(1.50, 150)
-		%(2.00, 150)
+		(  1,  13)
+		(  3,  13)
+		(  5,  13)
+		( 10,  13)
+		( 20,  20)
+		( 40,  40)
+		( 60,  62)
+		(120, 120)
+		(150, 150)
+		%(200, 150)
 	};
 	\addlegendentry{Lochblech}
 	%
 	%\addplot[color=teal,mark=triangle*] coordinates {
 	\addplot coordinates {
-		(0.20,  21)
-		(0.40,  42)
-		(0.60,  61)
-		(1.20, 122)
-		(1.50, 152)
-		(2.00, 201)
+		( 20,  21)
+		( 40,  42)
+		( 60,  61)
+		(120, 122)
+		(150, 152)
+		(200, 201)
 	};
 	\addlegendentry{Holzklotz, 3cm hoch}
 	%
