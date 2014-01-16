@@ -33,7 +33,7 @@
 	\end{description}
 	%
 	\section{Software}\label{s:software}
-	Für die Software wird das Echtzeitbetriebssystem FreeRTOS\footnote{Free real-time operating system} verwendet. Beim kleineren Roboter läuft die Naherkennungs-Software auf dem RoboBoard zusammen mit weiteren Teilgebieten.
+	Für die Software wird das Echtzeitbetriebssystem FreeRTOS\footnote{Free real-time operating system: \url{http://www.freeRTOS.org/}} verwendet. Beim kleineren Roboter läuft die Naherkennungs-Software auf dem RoboBoard zusammen mit weiteren Teilgebieten.
 	%
 		\subsection{Set\_SRF08\_address}\label{ss:set_srf08_address}
 		Damit am gleichen \iic-Bus beide Ultraschallsensoren verwendet werden können, musste zuerst eine separate Software zum ändern der Slave-Adresse erstellt werden. Der Ablauf der folgende:
@@ -89,6 +89,5 @@
 				\paragraph{Funktion startSRF08Meas und readSRF08Meas}\label{par:startsrf08meas_readsrf08meas} Diese Funktionen dienen zur Durchführung einer Messung.
 				%
 				\par Mit der Funktion \textbf{startSRF08Meas} wird das Kommando zum Starten der Messung in Millimeter per \iic\ an das Modul geschickt. Danach muss eine gewisse Zeit gewartet werden, da das Modul die Echos abwartet und in dieser Zeit nicht verwendet werden kann. Für das Modul SRF08 mit Standardverstärkung ist diese Zeit \SI{65}{\milli\second}.\par Nach dem Warten liefert die Funktion \textbf{readSRF08Meas} die gemessene Distanz in Millimeter. Das Modul sendet den Wert in zwei Byte, diese müssen also noch zusammengefügt werden.
-				%\image{content/image/flussdiagramm_readsrf08meas}{scale = 1, trim = 0 25px 0 25px, clip}[Flussdiagramm der Funktion readSRF08Meas][Flussdiagramm der Funktion readSRF08Meas][pic:flussdiagramm_readsrf08meas]
-				\missingfigure{Flussdiagramm enthält Fehler!}
+				\image{content/image/flussdiagramm_readsrf08meas}{scale = 1, trim = 0 25px 0 25px, clip}[Flussdiagramm der Funktion readSRF08Meas][Flussdiagramm der Funktion readSRF08Meas][pic:flussdiagramm_readsrf08meas]
 		%

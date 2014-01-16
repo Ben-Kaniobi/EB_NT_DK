@@ -73,8 +73,18 @@ Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaluatio
 	\end{minipage}
 	\end{figure}
 	%
-	Devantech\footnote{\url{http://www.devantech.co.uk/}} entwickelt diverse elektronische Module, darunter befindet sich auch eine Reihe von Ultraschall-Modulen zur Distanzmessung.
-	Für die Evaluation wurden drei Typen im \SI{40}{\kilo\hertz}-Bereich ausgewählt. Diese lassen sich alle mit \iic\ ansteuern und verwenden die gleiche Kommunikation, die Ansteuerung aller Sensoren ist also mit der gleichen Software möglich. Ausgelesen können Werte in Zentimeter, Inch und Milisekunden.
+	Devantech\footnote{\url{http://www.devantech.co.uk/}} entwickelt diverse elektronische Module, darunter befindet sich auch eine Reihe von Ultraschall-Modulen zur Distanzmessung. Diese basieren auf dem Prinzip der Laufzeitmessung:
+	\image{content/image/prinzip_laufzeitmessung}{scale=.7, trim = 100px 190px 100px 200px, clip}[Prinzip der Laufzeitmessung][Prinzip der Laufzeitmessung][pic:laufzeitmessung]
+	Der Ultraschallsender sendet einen Signal aus, trifft dieses auf ein Hindernis, wird das Echo vom Ultraschallempfänger empfangen. Mit der verstrichenen Zeit und der Schallgeschwindigkeit kann dann die Distanz zum Hindernis berechnet werden:
+	\formula{
+		s=\frac{1}{2}\cdot c_{Schall} \cdot \Delta t
+	}{
+		$s$ & Distanz / \SI{}{\meter}\\
+		$c\low{Schall}$ & Schallgeschwindigkeit / \SI{}{\meter\per\second} ($\approx~\SI{343.2}{\meter\per\second}$)\\
+		\Delta $t$ & Zeitdifferenz / \SI{}{\second}
+	}[eq:laufzeitmessung]
+	%
+	\par Für die Evaluation wurden drei Typen im \SI{40}{\kilo\hertz}-Bereich ausgewählt. Diese lassen sich alle mit \iic\ ansteuern und verwenden die gleiche Kommunikation, die Ansteuerung aller Sensoren ist also mit der gleichen Software möglich. Ausgelesen können Werte in Zentimeter, Inch und Milisekunden.
 	%
 		\subsection{SRF02}
 		Der Typ SRF02 weist die kleinste Bauform auf. Das Modul besteht nicht aus separatem Ultraschallsender und -empfänger, sondern die beiden Elemente sind in einem kombiniert. Der Erfassungsbereich wird vom Hersteller mit 55° angegeben \cite{url:spec_srf02}. Bei diesem Modul wäre zusätzlich zu \iic\ eine Ansteuerung mit RS-232 möglich, welche jedoch nicht getestet wurde.
@@ -110,7 +120,7 @@ Mit Hilfe der Liste konnte entschieden werden, welche Sensoren für die Evaluatio
 		%
 	\section{Lasersensor von Baumer}\label{s:lasersensor_von_baumer}
 	Der Sensor OADM 13U7480/S35A von Baumer\footnote{\url{http://www.baumer.com/ch-de/}} wurde bereits vom letztjährigen Team evaluiert, und für den "`Gegnerischen Roboter"' verwendet \cite{lit:gegnerischer_roboter}. Aus diesem Grund wurde keine erneute vollständige Evaluation, sonder lediglich eine Inbetriebnahme durchgeführt.
-	\missingfigure{Bild von Sensor}
+	\image{content/image/oadm_13u7480_s35a}{scale=.2}[OADM 13U7480/S35A][OADM 13U7480/S35A][pic:oadm_13u7480_s35a]
 	Der Lasersensor liefert genaue Messergebnisse, diese sind jedoch nur punktuell. Aus diesem Grund wurde in der vorher genannten Thesisarbeit drei dieser Sensoren verwendet \cite{lit:gegnerischer_roboter}.
 	%
 	\section{Entscheidung}\label{s:entscheidung}
