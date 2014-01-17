@@ -121,7 +121,7 @@
 			% Enumerationsstyle ändern
 			\renewcommand{\labelenumi}{\Alph{enumi}.}
 			\item Es wurden OR- statt AND-Verknüpfungen gebraucht. (Die IR-Sensoren sind low-aktiv\footnote{HIGH: Kein Objekt detektiert; LOW: Objekt detektiert}.) Fehler wurde behoben.
-			\item In der I\textsuperscript{2}C-Implementation der Vorgänger\footnote{File "`src/lib/i2c.c"'} werden mit \textit{while}-Schlaufen die Buszustände geprüfft. Dies konnte zu Endlosschlaufen führen. Zum Beheben wurden schon vor dem Test Timeout-Variablen hinzugefügt. Auch manuelles Löschen des Busy-Flags\footnote{Das Busy-Flag ist gesetzt während der Bus gerade für eine Übertragung verwendet wird.} wäre in diesem Fall notwendig, das Flag kann nur gelesen werden (readonly). Der Fehler kann somit nicht behoben werden. Dies ist jedoch nicht allzu schlimm, da eigentlich sowieso immer Beide Sensoren angeschlossen sein sollten.
+			\item In der I\textsuperscript{2}C-Implementation der Vorgänger\footnote{File "`src/lib/i2c.c"'} werden mit \textit{while}-Schlaufen die Buszustände geprüfft. Dies konnte zu Endlosschlaufen führen. Zum Beheben wurden schon vor dem Test Timeout-Variablen hinzugefügt. Auch manuelles Löschen des Busy-Flags\footnote{Das Busy-Flag ist gesetzt während der Bus gerade für eine Übertragung verwendet wird.} wäre in diesem Fall notwendig, das Flag kann aber nur gelesen werden (read only). Der Fehler kann somit nicht behoben werden. Dies ist jedoch nicht allzu schlimm, da eigentlich sowieso immer Beide Sensoren angeschlossen sein sollten.
 		\end{enumerate}
 		%
 \end{document}
