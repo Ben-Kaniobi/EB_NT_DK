@@ -5,8 +5,7 @@
 \chapter{Realisation}\label{ch:realisation}
 %
 	\section{Hardware}\label{s:hardware}
-	Es wird je ein Ultraschallmodul vorne und eines hinten am Roboter montiert. Die Infrarotsensoren werden auch vorne und hinten, je nach Platz positioniert.
-	Die Ultraschallmodule müssen nur an den \iic-Bus angeschlossen werden und benötigen keine weitere Hardware. Für die Infrarotsensoren ist jedoch eine einfache Schaltung notwendig. Die zwei LEDs werden über ein Trimm-Potentiometer am Sensor angeschlossen, so kann gegebenenfalls die Schaltdistanz herabgesetzt werden.
+	Es wird je ein Ultraschall-Modul vorne und eines hinten am Roboter montiert. Sie müssen nur an den \iic-Bus angeschlossen werden und benötigen keine weitere Hardware. Die Infrarotsensoren werden auch vorne und hinten, je nach Platz positioniert. Für diese Sensoren ist eine einfache Schaltung notwendig. Die zwei LEDs werden über ein Trimmpotentiometer am Sensor angeschlossen, so kann gegebenenfalls die Schaltdistanz herabgesetzt werden.
 	\image{content/image/ir-schema}{scale=.4}[Schema für Infrarotsensor][Schema für Infrarotsensor][pic:schema]
 	Da die Schaltung nicht besonders aufwendig ist, sind die Printe als Veroboard-Aufbau realisiert. Auf Wunsch des Volumenkonzept-Teams wurden vorerst zwei Varianten des Printlayouts erstellt, eine quadratische- und eine schmale Version. Da der Platz des kleinen Roboters relativ knapp ist, konnte so die bestmögliche Option ausgewählt werden.
 	\begin{figure}[H]
@@ -32,18 +31,22 @@
 		\item[Quadratische Version:] Hinten mittig, vorne rechts und links
 	\end{description}
 	%
+	Damit das Infrarotlicht nicht direkt in den Sensor strahlt sind Schrumpfschläuche um die LEDs notwendig. Es muss jeweils darauf geachtet werden, dass zwischen Print und Schrumpfschlauch kein Spalt ist durch den das Infrarotlicht scheinen kann. Die optimale Methode zum Anpassen der Schrumpfschläuche ist Folgende: \SI{1}{\centi\meter} abschneiden und um einen \SI{5}{\milli\meter} Inbusschlüssel schrumpfen. Danach kann der Schrumpfschlauch einfach auf die LEDs gesteckt werden und sollte so ideal befestigt sein.
+	%
+	\par Es wurde auch festgestellt, dass keine roten und blauen Schrumpfschläuche verwendet werden können, vermutlich kann das Infrarotlicht durch diese hindurch scheinen wodurch der Sensor immer LOW (also "`Objekt detektiert"') ausgibt. Mit schwarzen und braunen Schrumpfschläuchen funktioniert der Aufbau. Alle anderen Varianten wurden nicht getestet.
+	%
 	\section{Software}\label{s:software}
-	Für die Software wird das Echtzeitbetriebssystem FreeRTOS\footnote{Free real-time operating system: \url{http://www.freeRTOS.org/}} verwendet. Beim kleineren Roboter läuft die Naherkennungs-Software auf dem RoboBoard zusammen mit weiteren Teilgebieten.
+	Für die Software wird das Echtzeitbetriebssystem FreeRTOS\footnote{Free real-time operating system: \url{http://www.FreeRTOS.org/}} verwendet. Beim kleineren Roboter läuft die Naherkennungs-Software auf dem RoboBoard zusammen mit weiteren Teilgebieten.
 	%
 		\subsection{Set\_SRF08\_address}\label{ss:set_srf08_address}
-		Damit am gleichen \iic-Bus beide Ultraschallsensoren verwendet werden können, musste zuerst eine separate Software zum ändern der Slave-Adresse erstellt werden. Der Ablauf der folgende:
+		Damit am gleichen \iic-Bus beide Ultraschallsensoren verwendet werden können, musste zuerst eine separate Software zum ändern der Slave-Adresse erstellt werden. Der Ablauf ist der folgende:
 		\begin{enumerate}
-			\item Überprüffen ob neue Adresse gültig ist. Falls nicht, Programm nicht fortsetzten.
-			\item Erste Prüfsequenz zur Adressänderung via \iic\ an Kommandoregister senden und definierte Zeit warten.
-			\item Zweite Prüfsequenz zur Adressänderung via \iic\ an Kommandoregister senden und definierte Zeit warten.
-			\item Dritte Prüfsequenz zur Adressänderung via \iic\ an Kommandoregister senden und definierte Zeit warten.
-			\item Neue Adresse via \iic\ an Kommandoregister senden.
-			\item Beim Aus- und erneuten Einstecken sollte nun die LED auf dem Modul mit dem zur neuen Adresse gehörenden Code (siehe Spezifikationen \cite{url:spec_srf08}) blinken.
+			\item Überprüfgen ob neue Adresse gültig ist. Falls nicht, Programm nicht fortsetzten.
+			\item Erste Prüfsequenz zur Adressänderung via \iic\ ans Kommandoregister senden und definierte Zeit warten.
+			\item Zweite Prüfsequenz zur Adressänderung via \iic\ ans Kommandoregister senden und definierte Zeit warten.
+			\item Dritte Prüfsequenz zur Adressänderung via \iic\ ans Kommandoregister senden und definierte Zeit warten.
+			\item Neue Adresse via \iic\ ans Kommandoregister senden.
+			\item Beim Aus- und erneuten Einstecken sollte nun die LED auf dem Modul mit dem Code für die neue Adresse (siehe Spezifikationen \cite{url:spec_srf08}) blinken.
 		\end{enumerate}
 		%
 		Der vordere Sensor behielt seine Standard-Adresse (\hex{E0}), dem hinteren wurde die Adresse \hex{E2} neu zugewiesen.
@@ -52,7 +55,7 @@
 		Für die Naherkennung wurden zwei Task implementiert, einer für die Infrarot- und einer für die Ultraschallsensoren.
 		%
 			\subsubsection{IR-Task}\label{sss:ir-task}
-			Da ein Infrarotsensor lediglich einen GPIO\footnote{General purpose input/output} benötigt, ist der Taskablauf leicht zusammengefasst:
+			Da pro Infrarotsensor lediglich ein GPIO\footnote{General purpose input/output} benötigt wird, ist der Taskablauf schnell zusammengefasst:
 			\begin{enumerate}
 				\item GPIOs initialisieren.
 				\item Endlosschlaufe des folgenden Ablaufs:
@@ -60,7 +63,7 @@
 					\item Alle vier GPIOs lesen.
 					\item Überprüfen ob einer davon ein Hindernis erkennt.
 					\begin{enumerate}
-						\item Falls ein Hindernis erkannt ist, IR-Alarmflag setzen.
+						\item Falls ein Hindernis erkannt wurde, IR-Alarmflag setzen.
 						\item Andernfalls IR-Alarmflag zurücksetzen.
 					\end{enumerate}
 					\item Definierte Zeit warten, so dass der Task immer im gleichen Takt ausgeführt wird.
@@ -82,12 +85,15 @@
 					$x$ & Registerwert (\SI{1}{Byte})\\
 					$s$ & Reichweite in Millimeter
 				}[eq:gain]
-				Als maximale Reichweite wird in dieser Version \SI{1}{\meter} verwendet. Im Header-File\footnote{"`src/application/Rangefinder.h"'} ist dafür ein Makro\footnote{"`RANGEFINDER\_RANGE"'} definiert mit dem der Werte schnell angepasst werden kann.
+				Als maximale Reichweite wird in dieser Version \SI{1}{\meter} verwendet. Im Header-File\footnote{"`Rangefinder/src/application/Rangefinder.h"'} ist dafür ein Makro\footnote{"`RANGEFINDER\_RANGE"'} definiert mit dem der Wert schnell angepasst werden kann.
 				%
-				\par Der Registerwert der \textbf{Verstärkung} kann durch Probieren auf die Anwendung angepasst werden. In der Funktion wird wie bei der Reichweite zuerst der Wert überprüft, gegebenenfalls angepasst und dann an das Modul geschickt.
+				\par Der Registerwert der \textbf{Verstärkung} kann durch Probieren auf die Anwendung angepasst werden. In der Funktion wird wie bei der Reichweite zuerst der übergebene Wert überprüft, gegebenenfalls angepasst und dann an das Modul gesendet.
 				%
 				\paragraph{Funktion startSRF08Meas und readSRF08Meas}\label{par:startsrf08meas_readsrf08meas} Diese Funktionen dienen zur Durchführung einer Messung.
 				%
 				\par Mit der Funktion \textbf{startSRF08Meas} wird das Kommando zum Starten der Messung in Millimeter per \iic\ an das Modul geschickt. Danach muss eine gewisse Zeit gewartet werden, da das Modul die Echos abwartet und in dieser Zeit nicht verwendet werden kann. Für das Modul SRF08 mit Standardverstärkung ist diese Zeit \SI{65}{\milli\second}.\par Nach dem Warten liefert die Funktion \textbf{readSRF08Meas} die gemessene Distanz in Millimeter. Das Modul sendet den Wert in zwei Byte, diese müssen also noch zusammengefügt werden.
 				\image{content/image/flussdiagramm_readsrf08meas}{scale = 1, trim = 0 25px 0 25px, clip}[Flussdiagramm der Funktion readSRF08Meas][Flussdiagramm der Funktion readSRF08Meas][pic:flussdiagramm_readsrf08meas]
-		%
+	%
+	%\section{Kabel}\label{s:kabel}
+	%Für die Verkabelung wird ein Flachbandkabel mit zehn Leitern verwendet. Die Stecker sind folgendermassen angeordnet:
+	%\todo{text}

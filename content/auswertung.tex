@@ -4,11 +4,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Auswertung}\label{ch:auswertung}
 \section{Ergebnis}\label{s:ergebnis}
-Zur auswertung des Ergebnis wird das System in Bezug auf die anfangs beschriebenen Anforderungen bewertet:
+Zur Auswertung des Ergebnisses wird das System in Bezug auf die anfangs beschriebenen Anforderungen bewertet:
 \begin{description}
 	\item[Genauigkeit:] Gefordert war eine Hinderniserkennung in \SI{20}{\centi\meter} Entfernung. Mit dem realisierten System ist eine Erkennung von \SI{3}{\centi\meter} bis \SI{6}{\meter} möglich. Dieser Punkt wird also sehr gut erreicht.
-	\item[Zuverlässigkeit:] Durch die Verwendung von zwei unterschiedlichen Sensortypen wird Zuverlässigkeit stark erhöt.
-	\item[Geschwindigkeit:] Eine Messung des Ultraschallmoduls liegt auf grund der Laufzeitmessung im Millisekundenbereich, dies scheint akzeptabel. Das Lesen der Infrarotsensoren erfolgt sehr schnell über GPIOs. Da die Software auf dem selben Mikrokontroller läuft, wie das Kernsystem ist die Informationsübergabe verzögerungsfrei möglich.
+	\item[Zuverlässigkeit:] Durch die Verwendung von zwei unterschiedlichen Sensortypen wird die Zuverlässigkeit stark erhöht und entspricht somit der Anforderung.
+	\item[Geschwindigkeit:] Eine Messung der Ultraschall-Module liegt aufgrund der Laufzeitmessung im Millisekundenbereich, dies scheint akzeptabel. Das Lesen der Infrarotsensoren erfolgt sehr schnell über GPIOs. Da die Software auf dem selben Mikrocontroller läuft, wie das Kernsystem ist die Informationsübergabe verzögerungsfrei möglich.
 	\item[Platzbedarf:] Die Absprache mit dem Volumenkonzept-Team wurde vor der vollständigen Realisation der Hardware gemacht und es konnte eine gute Variante für die Montage gefunden werden.
 	\item[Energieverbrauch:] Die Sensoren haben kein grosser Energieverbrauch, das System kann direkt über den Sensorprint versorgt werden.
 	\item[Sicherheit:] Es wird kein Lasersystem oder sonstige Hardware verwendet, bei der speziell die Sicherheit für anwesende Personen beachtet werden muss.
@@ -18,11 +18,11 @@ Wie zu sehen ist wurden alle Anforderungen eingehalten, die Genauigkeit liegt so
 \section{Pendenzen}\label{s:pendenzen}
 In diesem Kapitel werden noch offene Punkte und mögliche Verbesserungen erläutert.
 %
-\par Was für den Wettbewerb noch getan werden muss, ist die Herstellung von Kabel und Printen als Ersatzmaterial und den zeiten Roboter. Weiter ist die Software momentan noch ein eigenständiges Projekt. Sie muss noch in die Software des Kernknotens eingebunden werden. Danach sollte das Naherkennungssystem in den Roboter eingebaut werden und so nochmals getestet werden.
+\par Was für den Wettbewerb noch getan werden muss, ist die Herstellung von Kabel und Printen als Ersatzmaterial und für den zweiten Roboter. Weiter ist die Software momentan noch ein eigenständiges Projekt. Sie muss noch in die Software des Kernknotens eingebunden werden. Danach sollte das Naherkennungssystem in den Roboter eingebaut werden und so nochmals getestet werden.
 %
-\par Damit die Software reibungslos funktioniert, müssen immer beide Ultraschall-Module eingesteckt sein. Wenn dies nicht der Fall ist, liefern die \iic-Funktionen dem verbleibenden Modul immer den gleichen Wert. Dies liegt daran, dass das Busy-Flags\footnote{Das Busy-Flag ist gesetzt während der Bus gerade für eine Übertragung verwendet wird.} nicht zurückgesetzt wird und auch nicht manuell zurückgesetzt werden kann (read only). Eventuell kann dieser Fehler irgendwie behoben werden, dies scheint jedoch nicht einfach durch eine Clear-Flag-Funktion realisierbar zu sein, sondern ist mit mehr Aufwand verbunden. Beispielsweise wäre es vielleicht möglich beim Auftreten dieses Fehlers die  \iic-Schnittstelle neu zu initialisieren, damit das Flag gelöscht wird und danach die Kommunikation zum nicht angeschlossenen Modul zu überspringen.
+\par Damit die Software reibungslos funktioniert, müssen immer beide Ultraschall-Module eingesteckt sein. Wenn dies nicht der Fall ist, liefert die \iic-Funktion zum Lesen des verbleibenden Moduls immer den gleichen Wert. Dies liegt daran, dass das Busy-Flags\footnote{Das Busy-Flag ist gesetzt während der Bus gerade für eine Übertragung verwendet wird.} nicht zurückgesetzt wird und auch nicht manuell zurückgesetzt werden kann (read only). Eventuell kann dieser Fehler irgendwie behoben werden, dies scheint jedoch nicht einfach durch eine Clear-Flag-Funktion realisierbar zu sein, sondern ist mit mehr Aufwand verbunden. Beispielsweise wäre es vielleicht möglich beim Auftreten dieses Fehlers die \iic-Schnittstelle neu zu initialisieren, damit das Flag gelöscht wird und danach die Kommunikation zum nicht angeschlossenen Modul zu überspringen.
 %
-\par Es wird zu diesem Zeitpunkt noch nicht überprüfft ob eine Messung fehlerhaft war. Damit eine Aussage darüber gemacht werden kann, wäre beispielsweise ein Vergleich der letzten drei Messungen möglich. Auf diese Weises könnte die Wahrscheinlichkeit einer Fehlmessung stark verkleinert werden.
+\par Es wird zu diesem Zeitpunkt noch nicht überprüft ob eine Messung fehlerhaft war. Damit eine Aussage darüber gemacht werden kann, wäre beispielsweise ein Vergleich der letzten drei Messungen möglich. Auf diese Weises könnte die Wahrscheinlichkeit einer Fehlmessung stark verkleinert werden. Bei grösseren Fehlern der Ultraschallmessungen könnte auch das teurere Modul SRF235 verwendet werden. Die Ansteuerung ist gleich wie bei allen SRF-Modulen. Speziell an dieser Version ist die Ultraschallfrequenz von \SI{235}{\kilo\hertz}, wodurch der Schallkegel viel gerichteter ist.
 %
 \section{Schlusswort}\label{s:schlusswort}
-Dies war das erste Projekt dieser Grösse, an dem ich beteiligt war.
+Eurobot ist das erste Projekt dieser Grösse, an dem ich beteiligt bin. Diese erste Projektarbeit war interessant und eine gute Erfahrung. Trotz der vielfachen zusätzlich aufgewendeten Zeit an Montagen und Dienstagen war es jedoch wiedermal etwas stressig, besonders gegen Ende. Nichtsdestotrotz bin ich auf die Projektarbeit 2 und besonders den Eurobot-Wettbewerb gespannt.
