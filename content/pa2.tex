@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titel:   Anforderungen
+% Autor:   Nicola Käser
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\PA{2}}\label{ch:pa2}
+Ein Teil der Zeit in der \PA{2} wurde weiter für die Naherkennung aufgewendet, einerseits um die im \autoref{s:pendenzen} beschriebenen Punkte zu realisieren und anderseits weil es durch verschiedene Änderungen bei anderen Bereichen auch bei der Naherkennung zu Änderungen kam. In diesem Kapitel werden diese Anpassungen und Erweiterungen erläutert.
+%
+	\section{Anpassungen}\label{s:anpassungen}
+	%
+		\subsection{Platzierung der Sensoren}\label{ss:platzierung}
+		Da sich in der \PA{2} beim Volumenkonzept Änderungen ergaben, konnte die Naherkennung nicht wie geplant montiert werden. Statt drei von den Infrarotsensoren vorne und einer hinten zu verwenden, wurde die Anordnung so geändert, dass nun zwei vorne und zwei hinten platziert sind. Dies wurde auch so in der Software geändert. Bei der Platzierung der Ultraschallsensoren hat sich nichts geändert.
+		%
+		\par In der neue Anordnung werden nur noch Infrarotsensor-Printe der Quadratischen Variante eingesetzt. Dies trifft auch für den grossen Roboter zu. Aus diesem Grund und zur Redundanz wurden weitere \todo{4?}vier Printe dieser Variante gefertigt, sodass jetzt noch \todo{2?}zwei davon als Ersatz vorhanden sind.
+		%
+		\subsection{Softwareänderungen bezüglich IR-Sensoren}\label{ss:softchangeir}
+		Um die Software effizienter zu gestalten wurde auf den Task für Infrarotsensoren verzichtet. Das Einlesen der Sensoren erfolgt nun nicht mehr durch Polling der GPIO-Pins, sondern es wird bei einer Flankenänderung am Pin ein Interrupt ausgelöst. Im Interrupt-Handler wird dann bestimmt ob es sich um eine positive oder negative Flanke handelt und dementsprechend die Alarmflag-Variable gesetzt. Es wäre auch möglich gewesen lediglich die Variable zu toggeln, da ja nach einer positiven Flanke immer eine negative Flanke folgen sollte. Auf diese Methode wurde aber verzichtet, damit die Software möglichst fehlerresistent ist.
+		%
+		\par Um die Modularität der Software beizubehalten, wurde eine neue C-Datei erstellt, in der sich alle Interrupt-Handler für externe Interrupts befinden. Beispielsweise sind zum Teil einige \textit{exti-lines\footnote{"`Kanäle"' für externe Interrupts}} in einem Handler zusammengefasst. So kann es sein, dass mehrere Module den selben Handler benötigen. Damit es desshalb kein Durcheinander gibt wird nun in den Handlern pro \textit{exti-line} einfach eine Funktion des jeweiligen Moduls aufgerufen.
+		\image{content/image/uebersicht_interrupthandler}{scale=.6}[Das Interrupt-Handler-Modul ruft Funktionen der Naherkennung auf][Interrupt-Handler][pic:interrupthandler]
+		%
+		\subsection{Softwareänderungen bezüglich Ultraschallsensoren}\label{ss:softchangeus}
+		Wie bei den Tests in der \PA{1} festgestellt und in \autoref{s:pendenzen} erläutert wurde, gab es ein Problem mit der \iic-Schnittstelle. Beim Fehlen eines angesprochenen Slaves blieb der Bus-Zustand permanent auf \textit{Busy}. In der neuen Version wurde eine zusätzliche Funktion implementiert, die ein Teil der \iic-Initialisierung wiederholt. Dadurch wird der Buszustand zurückgesetzt und die Schnittstelle kann wieder benutzt werden. Während der \PA{1} wurde das \iic-Modul vom RoboBoard so erweitert, dass der Fehlzustand mit Hilfe einer Timeout-Variable erkannt werden konnte worauf die Variable \code{i2c\_timeout\_flag} gesetzt wurde. Mit der aktuellen Version kann nun also das \iic-Problem behoben werden indem nach jeder Übertragung diese Variable überprüft und im Fehlerfall die Funktion \code{reinitI2C()} ausgefürd wird.
+		%
+	\section{Erweiterungen}\label{s:erweiterungen}
+	%
+		\subsection{Softwarergänzungen bezüglich Ultraschallsensoren}\label{ss:softaddus}
+		Da die Ultraschallmessung fehleranfälliger als die Infrarotmessung ist, wurde eine Überprüfung der Messwerte in der Software hinzugefügt. %Nach einer Messung wird nun der aktuelle Status zuerst mit den letzten zwei Status verglichen. Wenn zwei oder alle der drei Werten 
+		
+		%der Messwert immer noch direkt zu einem binären Wert, mit der Bedeutung "`Objekt zu nah"' oder "`kein Objekt zu nah"', umgewandelt. Danach wird dieser Wert mit den letzten zwei 
+		%
+		
+		
+		
+		
