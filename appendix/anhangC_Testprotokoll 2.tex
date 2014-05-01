@@ -66,6 +66,10 @@
 		%
 	\subsection{Ultraschall Task}
 		\begin{itemize}
+			\item System/FreeRTOS:
+			\begin{itemize}
+				\item Task wird zu Beginn \textit{suspended}\dotfill \leer
+			\end{itemize}
 			\item Sensoren lösen bei Hindernis (näher als in Header definiert) Alarm aus:
 			\begin{itemize}
 				\item Flag für vorne\dotfill \leer
@@ -82,12 +86,6 @@
 			\begin{itemize}
 				\item Task funktioniert auch falls nicht beide Sensoren angeschlossen\dotfill \leer
 				\item Mit Definition \texttt{RANGEFINDER\_ONLY\_FW} funktioniert nur der vordere Sensor\dotfill \leer
-			\end{itemize}
-			\item System/FreeRTOS:
-			\begin{itemize}
-				\item Task wird zu Beginn \textit{suspended}\dotfill \leer
-				\item Zum Fahren wird der Task wieder \textit{running}\dotfill \leer
-				\item Nach dem Fahren wird der Task wieder \textit{suspended}\dotfill \leer
 			\end{itemize}
 		\end{itemize}
 		%
