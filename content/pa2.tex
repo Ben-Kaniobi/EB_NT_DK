@@ -8,15 +8,17 @@ Ein Teil der Zeit in der \PA{2} wurde weiter für die Naherkennung aufgewendet, e
 	\section{Anpassungen}\label{s:anpassungen}
 	%
 		\subsection{Platzierung der Senseoren}\label{ss:platzierung}
-		Da sich in der \PA{2} beim Volumenkonzept Änderungen ergaben, konnte die Naherkennung nicht wie geplant montiert werden. Statt drei von den Infrarotsensoren vorne und einer hinten zu verwenden, wurde die Anordnung so geändert, dass nun zwei vorne und zwei hinten platziert sind. \missingfigure{Neue Position, siehe AJ 16.4.14} Dies wurde auch so in der Software geändert. Bei der Platzierung der Ultraschallsensoren hat sich nichts geändert.
+		Da sich in der \PA{2} beim Volumenkonzept Änderungen ergaben, konnte die Naherkennung nicht wie geplant montiert werden. Statt drei von den Infrarotsensoren vorne und einer hinten zu verwenden, wurde die Anordnung so geändert, dass nun zwei vorne und zwei hinten platziert sind.
+		\image{content/image/pa2_ir_pos}{scale=.6}[Neue IR-Sensor Positionen][Neue IR-Sensor Positionen][pic:interrupthandler]
+		Dies wurde auch so in der Software geändert. Bei der Platzierung der Ultraschallsensoren hat sich nichts geändert.
 		%
-		\par In der neue Anordnung werden nur noch Infrarotsensor-Printe der Quadratischen Variante eingesetzt. Dies trifft auch für den grossen Roboter zu. Aus diesem Grund und zur Redundanz wurden weitere \todo{4?}vier Printe dieser Variante gefertigt, sodass jetzt noch \todo{2?}zwei davon als Ersatz vorhanden sind.
+		\par In der neue Anordnung werden nur noch Infrarotsensor-Printe der Quadratischen Variante eingesetzt. Dies trifft auch für den grossen Roboter zu. Aus diesem Grund und zur Redundanz wurden weitere Printe dieser Variante gefertigt, sodass jetzt noch als Ersatz vorhanden sind.
 		%
 		\subsection{Softwareänderungen bezüglich IR-Sensoren}\label{ss:softchangeir}
 		Um die Software effizienter zu gestalten wurde auf den Task für Infrarotsensoren verzichtet. Das Einlesen der Sensoren erfolgt nun nicht mehr durch Polling der GPIO-Pins, sondern es wird bei einer Flankenänderung am Pin ein Interrupt ausgelöst. Im Interrupt-Handler wird dann bestimmt ob es sich um eine positive oder negative Flanke handelt und dementsprechend die Alarmflag-Variable gesetzt. Es wäre auch möglich gewesen lediglich die Variable zu toggeln, da ja nach einer positiven Flanke immer eine negative Flanke folgen sollte. Auf diese Methode wurde aber verzichtet, damit die Software möglichst fehlerresistent ist.
 		%
 		\par Um die Modularität der Software beizubehalten, wurde eine neue C-Datei erstellt, in der sich alle Interrupt-Handler für externe Interrupts befinden. Beispielsweise sind zum Teil einige \textit{exti-lines\footnote{"`Kanäle"' für externe Interrupts}} in einem Handler zusammengefasst. So kann es sein, dass mehrere Module den selben Handler benötigen. Damit es desshalb kein Durcheinander gibt wird nun in den Handlern pro \textit{exti-line} einfach eine Funktion des jeweiligen Moduls aufgerufen.
-		\image{content/image/uebersicht_interrupthandler}{scale=.6}[Das Interrupt-Handler-Modul ruft Funktionen der Naherkennung auf][Interrupt-Handler][pic:interrupthandler]
+		\image{content/image/uebersicht_interrupthandler}{scale=.6}[Das Interrupt-Handler-Modul ruft unter Anderem Funktionen der Naherkennung auf][Interrupt-Handler][pic:pa2_ir_pos]
 		%
 		\subsection{Softwareänderungen bezüglich Ultraschallsensoren}\label{ss:softchangeus}
 		Wie bei den Tests in der \PA{1} festgestellt und in \autoref{s:pendenzen} erläutert wurde, gab es ein Problem mit der \iic-Schnittstelle. Beim Fehlen eines angesprochenen Slaves blieb der Bus-Zustand permanent auf \textit{Busy}. In der neuen Version wurde eine zusätzliche Funktion implementiert, die ein Teil der \iic-Initialisierung wiederholt. Dadurch wird der Buszustand zurückgesetzt und die Schnittstelle kann wieder benutzt werden. Während der \PA{1} wurde das \iic-Modul vom RoboBoard so erweitert, dass der Fehlzustand mit Hilfe einer Timeout-Variable erkannt werden konnte worauf die Variable \code{i2c\_timeout\_flag} gesetzt wurde. Mit der aktuellen Version kann nun also das \iic-Problem behoben werden indem nach jeder Übertragung diese Variable überprüft und im Fehlerfall die Funktion \code{reinitI2C()} ausgefürd wird.
@@ -24,11 +26,24 @@ Ein Teil der Zeit in der \PA{2} wurde weiter für die Naherkennung aufgewendet, e
 	\section{Erweiterungen}\label{s:erweiterungen}
 	%
 		\subsection{Softwarergänzungen bezüglich Ultraschallsensoren}\label{ss:softaddus}
-		Da die Ultraschallmessung fehleranfälliger als die Infrarotmessung ist, wurde eine Überprüfung der Messwerte in der Software hinzugefügt. %Nach einer Messung wird nun der aktuelle Status zuerst mit den letzten zwei Status verglichen. Wenn zwei oder alle der drei Werten 
-		
-		%der Messwert immer noch direkt zu einem binären Wert, mit der Bedeutung "`Objekt zu nah"' oder "`kein Objekt zu nah"', umgewandelt. Danach wird dieser Wert mit den letzten zwei 
+		Da die Ultraschallmessung fehleranfälliger als die Infrarotmessung ist, wurde eine Überprüfung der Messwerte in der Software hinzugefügt. Dies geschieht folgendermassen:
+		\begin{enumerate}[noitemsep]
+			\item Messwert mittels Schwelle für zulässige Distanz binarisieren
+			\item Die drei letzten binarisierten Werte miteinander vergleichen
+			\begin{itemize}
+				\item Falls mindestens zwei Werte gesetzt sind (Objekt detektiert), Alarm-Flag setzen
+				\item Andernfalls (kein Objekt detektiert), Alarm-Flag zurücksetzen
+			\end{itemize}
+		\end{enumerate}
 		%
-		
-		
-		
-		
+		Mit dieser Methode können Falschmessungen behoben werden, die Detektion wird aber etwas verzögert.
+		%
+		\par Weiter wurde eine Massnahme unternommen, um gegenseitige Störungen zwischen den beiden Robotern zu minimieren. Der Ultraschall-Task wurde so ergänzt, dass dieser zu Beginn \textit{susbended} wird, also vom Task-Scheduler nicht mehr aufgerufen wird. Erst bevor der Roboter sich fortbewegt wird der Zustand des Tasks wieder zu \textit{running} geändert und ist somit während der Fahrt aktiv. Nach dem Anhalten wird die Naherkennung dann nicht mehr benötigt und der Task kann wieder \textit{susbended} werden.
+		%
+		\subsection{Erweiterung für die Mammoth-Node}
+		Beim Lösen der Mammut-Aufgabe bewegt sich ein Teil des Roboters nach aussen (siehe Dokumentation des Kernteams). Damit es dabei keine Probleme gibt, muss überprüft werden können ob dafür Platz vorhanden ist. Dies fällt in den Aufgabenbereich der Naherkennung. So wurde ein zusätzliches Flag \texttt{Rangefinder\_flag\_SeAlarmUS} eingeführt. Während der normalen Messung der Naherkennung wird die gemessene Distanz zusätzlich auf den benötigten Platz für die Mammut-Aufgabe überprüft und dementsprechend das Flag gesetzt.
+		%
+		\subsection{Verwendung der Naherkennung in nur eine Richtung}
+		Wenn sich der Roboter nur vorwärts bewegt, wird die hintere Naherkennung nicht benötigt. In diesem Fall ist es sinnvoll, wenn in der Software nur der Teil für die Vorwärts-Naherkennung berücksichtigt wird. So können gegenseitige Störungen weiter minimiert werden und der Ultraschall-Task ist nicht mit unnötigen Aktivitäten beschäftigt.
+		Damit dafür aber keine zweite Software-Variante erstellt werden muss, wurden Präprozessor-Bedingungen hinzugefügt. Folglich werden die Softwareteile für die Rückwärts-Naherkennung nicht miteinbezogen, wenn das Makro \texttt{RANGEFINDER\_ONLY\_FW} definiert ist.		
+		%
