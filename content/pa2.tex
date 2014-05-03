@@ -40,7 +40,7 @@ Ein Teil der Zeit in der \PA{2} wurde weiter für die Naherkennung aufgewendet, e
 		%
 		\par Weiter wurde eine Massnahme unternommen, um gegenseitige Störungen zwischen den beiden Robotern zu minimieren. Der Ultraschall-Task wurde so ergänzt, dass dieser zu Beginn \textit{susbended} wird, also vom Task-Scheduler nicht mehr aufgerufen wird. Erst bevor der Roboter sich fortbewegt wird der Zustand des Tasks wieder zu \textit{running} geändert und ist somit während der Fahrt aktiv. Nach dem Anhalten wird die Naherkennung dann nicht mehr benötigt und der Task kann wieder \textit{susbended} werden.
 		%
-		\subsection{Erweiterung für die Mammoth-Node}
+		\subsection{Erweiterung für die Mammut-Aufgabe}
 		Beim Lösen der Mammut-Aufgabe bewegt sich ein Teil des Roboters nach aussen (siehe Dokumentation des Kernteams). Damit es dabei keine Probleme gibt, muss überprüft werden können ob dafür Platz vorhanden ist. Dies fällt in den Aufgabenbereich der Naherkennung. So wurde ein zusätzliches Flag \texttt{Rangefinder\_flag\_SeAlarmUS} eingeführt. Während der normalen Messung der Naherkennung wird die gemessene Distanz zusätzlich auf den benötigten Platz für die Mammut-Aufgabe überprüft und dementsprechend das Flag gesetzt.
 		%
 		\subsection{Verwendung der Naherkennung in nur eine Richtung}
