@@ -12,9 +12,9 @@
 %\usepackage[final]{pdfpages}   % PDF einbinden
 
 \title{Testprotokoll Rangefinder}
-\subtitle{Blackboxtest, Version 1.2}
+\subtitle{Blackboxtest Version 1.1}
 \author{N. Käser}
-\date{1. Mai 2014} %\today
+\date{12. März 2014}
 
 \MakePerPage{footnote}
 
@@ -37,63 +37,51 @@
 \maketitle%\todo{Datum der Testdurchführung}
 %
 \hfill Test Nr.: \setlength{\fboxsep}{1pt}\fbox{1}%\fbox{2}
-%\section{Software Set\_SRF08\_Address}
-	%An dieser Software wurde nichts verändert, weshalb sie nicht nochmal getestet werden muss.
-		%%
+\section{Software Set\_SRF08\_Address}
+	An dieser Software wurde nichts verändert, weshalb sie nicht nochmal getestet werden muss.
+	%
 \section{Software Rangefinder}
 	\subsection{Allgemein}
 		\begin{itemize}
-			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill \leer
+			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill \ok
 		\end{itemize}
 	\subsection{Infrarot Interrupt}
 		\begin{itemize}
 			\item Sensoren lösen bei Hindernis Alarm aus:
 			\begin{itemize}
-				\item Flag für vorne links\dotfill \leer
-				\item Flag für vorne rechts\dotfill \leer
-				\item Flag für hinten links\dotfill \leer
-				\item Flag für hinten rechts\dotfill \leer
+				\item Sensor links\dotfill \ok
+				\item Sensor mitte\dotfill \ok
+				\item Sensor rechts\dotfill \ok
+				\item Sensor hinten\dotfill \ok
 			\end{itemize}
 			\item Sensoren setzen ohne Hindernis Alarm zurück:
 			\begin{itemize}
-				\item Flag für vorne links\dotfill \leer
-				\item Flag für vorne rechts\dotfill \leer
-				\item Flag für hinten links\dotfill \leer
-				\item Flag für hinten rechts\dotfill \leer
+				\item Sensor links\dotfill \ok
+				\item Sensor mitte\dotfill \ok
+				\item Sensor rechts\dotfill \ok
+				\item Sensor hinten\dotfill \ok
 			\end{itemize}
-			\item Software funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \leer
+			\item Software funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \ok
 		\end{itemize}
 		%
 	\subsection{Ultraschall Task}
 		\begin{itemize}
-			\item System/FreeRTOS:
-			\begin{itemize}
-				\item Task wird zu Beginn \textit{suspended}\dotfill \leer
-			\end{itemize}
 			\item Sensoren lösen bei Hindernis (näher als in Header definiert) Alarm aus:
 			\begin{itemize}
-				\item Flag für vorne\dotfill \leer
-				\item Flag für hinten\dotfill \leer
-				\item Flag für Separation\dotfill \leer
+				\item Sensor vorne\dotfill \ok
+				\item Sensor hinten\dotfill \ok
 			\end{itemize}
 			\item Sensoren setzen ohne Hindernis Alarm zurück:
 			\begin{itemize}
-				\item Sensor vorne\dotfill \leer
-				\item Sensor hinten\dotfill \leer
-				\item Flag für Separation\dotfill \leer
+				\item Sensor vorne\dotfill \ok
+				\item Sensor hinten\dotfill \ok
 			\end{itemize}
-			\item Verwendung von nur einem Sensor:
-			\begin{itemize}
-				\item Task funktioniert auch falls nicht beide Sensoren angeschlossen\dotfill \leer
-				\item Mit Definition \texttt{RANGEFINDER\_ONLY\_FW} funktioniert nur der vordere Sensor\dotfill \leer
-			\end{itemize}
+			\item Task funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \ok
 		\end{itemize}
 		%
-	%\subsection{System/FreeRTOS}
-	%
 	%\clearpage
 	\subsection{Notizen}
-	\todo{bla} %-
+	-
 %		\begin{enumerate}
 %			% Enumerationsstyle ändern
 %			\renewcommand{\labelenumi}{\Alph{enumi}.}
@@ -101,7 +89,7 @@
 %		\end{enumerate}
 		%
 	\subsection{Fazit}
-	\todo{bla} %Die Software lief auf Anhieb wie erwartet.
+	Die Software lief auf Anhieb wie erwartet.
 %		\begin{enumerate}
 %			% Enumerationsstyle ändern
 %			\renewcommand{\labelenumi}{\Alph{enumi}.}
@@ -109,3 +97,9 @@
 %		\end{enumerate}
 		%
 \end{document}
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+\documentclass{scrartcl}
+
+\usepackage[ansinew]{inputenc}  % Schriftcodierung für Windows
+\usepackage[T1]{fontenc}        % Schriftkodierung
+\usepackage[ngerman]{babel}     % Neue de. Rechtschr. (Worttrennung, äöüß etc.) als Parameter für babel
+\usepackage{lmodern}            % Darstellung
+\usepackage{wasysym}            % Spezielle Symbole
+\usepackage{todonotes}          % ToDo-Notizen
+\usepackage{perpage}
+%\usepackage{calc}               % Erweiterte Berechnungen/Text messen
+%\usepackage{amsmath}  % Math
+%\usepackage[final]{pdfpages}   % PDF einbinden
+
+\title{Testprotokoll Rangefinder}
+\subtitle{Blackboxtest, Version 1.2}
+\author{N. Käser}
+\date{1. Mai 2014} %\today
+
+\MakePerPage{footnote}
+
+\newcommand{\hardwareinfo}{STM32 F4 Discovery Board mit RoboBoard}
+\newcommand{\hex}[1]{#1\textsubscript{hex}}%h}}%(16)}}
+
+% Checkboxen
+\newcommand{\platz}{\textcolor{white}{$\Box$}}
+\newcommand{\leer}{$\Box$}
+\newcommand{\ok}{$\CheckedBox$}
+\newcommand{\nok}[1]{#1}%\mbox{\ooalign{\leer\cr\hidewidth \textcolor{red}{#1}\hidewidth\cr}}}
+
+
+% Punktstyles global ändern
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemiii}{$\cdot$}
+
+
+\begin{document}
+\maketitle%\todo{Datum der Testdurchführung}
+%
+\hfill Test Nr.: \setlength{\fboxsep}{1pt}\fbox{1}%\fbox{2}
+%\section{Software Set\_SRF08\_Address}
+	%An dieser Software wurde nichts verändert, weshalb sie nicht nochmal getestet werden muss.
+		%%
+\section{Software Rangefinder}
+	\subsection{Allgemein}
+		\begin{itemize}
+			\item Software kann auf der Hardware\footnote{\hardwareinfo} debuged werden\dotfill \ok
+		\end{itemize}
+	\subsection{Infrarot Interrupt}
+		\begin{itemize}
+			\item Sensoren lösen bei Hindernis Alarm aus:
+			\begin{itemize}
+				\item Flag für vorne links\dotfill A\ok
+				\item Flag für vorne rechts\dotfill \ok
+				\item Flag für hinten links\dotfill \ok
+				\item Flag für hinten rechts\dotfill \ok
+			\end{itemize}
+			\item Sensoren setzen ohne Hindernis Alarm zurück:
+			\begin{itemize}
+				\item Flag für vorne links\dotfill A\ok
+				\item Flag für vorne rechts\dotfill \ok
+				\item Flag für hinten links\dotfill \ok
+				\item Flag für hinten rechts\dotfill \ok
+			\end{itemize}
+			\item Software funktioniert auch falls nicht alle Sensoren angeschlossen\dotfill \ok
+		\end{itemize}
+		%
+	\subsection{Ultraschall Task}
+		\begin{itemize}
+			\item System/FreeRTOS:
+			\begin{itemize}
+				\item Task wird zu Beginn \textit{suspended}\dotfill \ok
+			\end{itemize}
+			\item Sensoren lösen bei Hindernis (näher als in Header definiert) Alarm aus:
+			\begin{itemize}
+				\item Flag für vorne\dotfill \ok
+				\item Flag für hinten\dotfill \ok
+				\item Flag für Separation\dotfill \ok
+			\end{itemize}
+			\item Sensoren setzen ohne Hindernis Alarm zurück:
+			\begin{itemize}
+				\item Sensor vorne\dotfill \ok
+				\item Sensor hinten\dotfill \ok
+				\item Flag für Separation\dotfill \ok
+			\end{itemize}
+			\item Verwendung von nur einem Sensor:
+			\begin{itemize}
+				\item Task funktioniert auch falls nicht beide Sensoren angeschlossen\dotfill \ok
+				\item Mit Definition \texttt{RANGEFINDER\_ONLY\_FW} funktioniert nur der vordere Sensor\dotfill \ok
+			\end{itemize}
+		\end{itemize}
+		%
+	%\subsection{System/FreeRTOS}
+	%
+	%\clearpage
+	\subsection{Notizen}
+		\begin{enumerate}
+			% Enumerationsstyle ändern
+			\renewcommand{\labelenumi}{\Alph{enumi}.}
+			\item Beim Sensor vorne links wurde kein Alarm ausgelöst. Die Ursache war aber eine Beschädigung des Infrarot-Prints bei der Montage. Dieses Problem wurde gleich behoben und der Test konnte sogleich fortgesetzt werden.
+		\end{enumerate}
+		%
+	\subsection{Fazit}
+	Der Test wurde, bis auf ein kleines Hardware-Problem welches gleich behoben werden konnte, erfolgreich abgeschlossen.
+%		\begin{enumerate}
+%			% Enumerationsstyle ändern
+%			\renewcommand{\labelenumi}{\Alph{enumi}.}
+%			\item blabla
+%		\end{enumerate}
+		%
+\end{document}
